@@ -6,9 +6,9 @@ Hosted via GitHub Pages at: https://branicio.github.io/bredday-support/
 
 ## Pages
 
-- `index.html` — Support landing page (contact + links)
-- `privacy.html` — Privacy Policy
-- `terms.html` — Terms of Use
+- [Support](https://branicio.github.io/bredday-support/) — landing page (contact + links) (`index.html`)
+- [Privacy Policy](https://branicio.github.io/bredday-support/privacy.html) (`privacy.html`)
+- [Terms of Use](https://branicio.github.io/bredday-support/terms.html) (`terms.html`)
 
 ## Contact
 

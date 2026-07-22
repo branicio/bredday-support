@@ -1,177 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BredDay Support</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            line-height: 1.6;
-            color: #26261F;
-            background: linear-gradient(135deg, #26261F 0%, #3E7C4F 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        .hero {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            padding: 50px 40px;
-            margin-bottom: 20px;
-        }
-        .app-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 26px;
-            margin: 0 auto 25px;
-            box-shadow: 0 4px 15px rgba(62, 124, 79, 0.4);
-        }
-        h1 {
-            font-size: 2.2em;
-            color: #26261F;
-            margin-bottom: 10px;
-        }
-        .tagline {
-            color: #666;
-            font-size: 1.1em;
-            margin-bottom: 30px;
-        }
-        .links {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .link-card {
-            background: #f2f7f3;
-            border-radius: 12px;
-            padding: 20px;
-            text-decoration: none;
-            color: #26261F;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .link-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(62, 124, 79, 0.2);
-        }
-        .link-icon {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, #26261F 0%, #3E7C4F 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            flex-shrink: 0;
-        }
-        .link-content {
-            text-align: left;
-        }
-        .link-title {
-            font-weight: 600;
-            color: #26261F;
-            margin-bottom: 3px;
-        }
-        .link-description {
-            font-size: 0.9em;
-            color: #666;
-        }
-        .contact-section {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            padding: 30px;
-        }
-        .contact-section h2 {
-            color: #26261F;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-        .contact-section p {
-            color: #666;
-            margin-bottom: 15px;
-        }
-        .email-link {
-            display: inline-block;
-            background: linear-gradient(135deg, #26261F 0%, #3E7C4F 100%);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .email-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(62, 124, 79, 0.4);
-        }
-        .footer {
-            margin-top: 30px;
-            color: rgba(255,255,255,0.8);
-            font-size: 0.9em;
-        }
-        .footer a {
-            color: white;
-            text-decoration: none;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BredDay — Livestock Gestation &amp; Breeding Calculator</title>
+<meta name="description" content="BredDay is the offline gestation & breeding calculator for cattle, horses, goats, sheep, pigs, rabbits, alpacas & llamas. Due dates, checkpoints, reminders, and a countdown widget. No ads. No tracking.">
+<link rel="icon" href="app-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4EAD2;
+    --paper-2:#FBF6E8;
+    --card:#FCF9EF;
+    --ink:#241E13;
+    --ink-soft:#5f5540;
+    --green:#3E7C4F;
+    --green-deep:#264d31;
+    --barn:#B33A3A;
+    --amber:#C9821B;
+    --wheat:#EFE3C4;
+    --hair:rgba(38,77,49,.16);
+    --shadow:0 18px 40px -22px rgba(36,30,19,.45);
+    --shadow-sm:0 8px 20px -14px rgba(36,30,19,.5);
+    --serif:"Fraunces",Georgia,"Times New Roman",serif;
+    --sans:"Archivo",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* Paper grain overlay */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;
+    opacity:.05;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a{color:inherit}
+  ::selection{background:var(--amber);color:#fff}
+
+  .wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(244,234,210,.82);
+    backdrop-filter:saturate(150%) blur(10px);
+    border-bottom:1px solid var(--hair);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-weight:600}
+  .brand img{width:34px;height:34px;border-radius:9px;box-shadow:var(--shadow-sm)}
+  .brand b{font-family:var(--serif);font-size:1.32rem;font-weight:600;letter-spacing:-.01em}
+  .nav-links{display:flex;gap:26px;font-size:.93rem;font-weight:500}
+  .nav-links a{text-decoration:none;color:var(--ink-soft);transition:color .2s}
+  .nav-links a:hover{color:var(--green-deep)}
+  @media(max-width:640px){.nav-links{display:none}}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;text-align:center;padding:74px 0 64px;overflow:hidden}
+  .hero::before{ /* sun/pasture glow */
+    content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);
+    width:760px;height:760px;border-radius:50%;
+    background:radial-gradient(circle,rgba(201,130,27,.20),rgba(62,124,79,.14) 42%,transparent 66%);
+    z-index:0;
+  }
+  .hero > *{position:relative;z-index:1}
+  .hero-icon{
+    width:132px;height:132px;border-radius:30px;box-shadow:var(--shadow);
+    margin-bottom:26px;animation:pop .7s cubic-bezier(.2,.8,.25,1) both;
+  }
+  .hero h1{
+    font-family:var(--serif);font-weight:600;letter-spacing:-.02em;line-height:.98;
+    font-size:clamp(3rem,9vw,5.4rem);color:var(--green-deep);
+    animation:rise .7s ease .05s both;
+  }
+  .hero .lede{
+    font-family:var(--serif);font-style:italic;font-weight:400;
+    font-size:clamp(1.25rem,3.2vw,1.7rem);color:var(--barn);margin-top:14px;
+    animation:rise .7s ease .12s both;
+  }
+  .hero .sub{
+    max-width:620px;margin:16px auto 0;color:var(--ink-soft);font-size:1.06rem;
+    animation:rise .7s ease .18s both;
+  }
+  .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:26px;animation:rise .7s ease .24s both}
+  .chip{
+    display:inline-flex;align-items:center;gap:7px;
+    background:var(--paper-2);border:1px solid var(--hair);
+    padding:8px 15px;border-radius:999px;font-size:.9rem;font-weight:600;color:var(--green-deep);
+    box-shadow:var(--shadow-sm);
+  }
+  .platform{margin-top:22px;font-size:.85rem;letter-spacing:.04em;color:var(--ink-soft);animation:rise .7s ease .3s both}
+  .platform b{color:var(--ink)}
+
+  /* ---------- Section scaffolding ---------- */
+  section{padding:62px 0}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--barn);margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--barn);display:inline-block}
+  .sec-title{font-family:var(--serif);font-weight:600;letter-spacing:-.015em;line-height:1.05;
+    font-size:clamp(1.9rem,4.4vw,2.8rem);color:var(--green-deep);max-width:16ch}
+  .sec-intro{color:var(--ink-soft);max-width:56ch;margin-top:12px;font-size:1.05rem}
+
+  /* ---------- Features ---------- */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:38px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .feature{
+    background:var(--card);border:1px solid var(--hair);border-radius:18px;
+    padding:26px 24px;box-shadow:var(--shadow-sm);
+    transition:transform .25s cubic-bezier(.2,.8,.25,1),box-shadow .25s,border-color .25s;
+  }
+  .feature:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:rgba(62,124,79,.4)}
+  .feature.wide{grid-column:1/-1}
+  .badge{
+    width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:26px;
+    background:radial-gradient(circle at 30% 25%,var(--wheat),#e6d5a8);
+    border:1px solid rgba(38,77,49,.14);margin-bottom:16px;
+  }
+  .feature h3{font-size:1.18rem;font-weight:600;letter-spacing:-.01em;margin-bottom:7px}
+  .feature p{color:var(--ink-soft);font-size:.98rem}
+  .feature .tag{
+    display:inline-block;margin-bottom:10px;font-size:.68rem;font-weight:700;letter-spacing:.09em;
+    text-transform:uppercase;color:#fff;background:var(--barn);padding:3px 9px;border-radius:6px;
+  }
+
+  /* ---------- Species almanac ---------- */
+  .almanac{background:var(--paper-2);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+  .species{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px;
+  }
+  @media(max-width:720px){.species{grid-template-columns:repeat(2,1fr)}}
+  .beast{
+    text-align:center;background:var(--card);border:1px solid var(--hair);border-radius:16px;
+    padding:22px 10px;box-shadow:var(--shadow-sm);position:relative;
+  }
+  .beast .em{font-size:36px;line-height:1;display:block}
+  .beast .nm{font-weight:600;margin-top:10px;font-size:.98rem}
+  .beast .dy{font-family:var(--serif);font-weight:600;font-size:1.7rem;color:var(--green);margin-top:6px;line-height:1}
+  .beast .un{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+  .almanac .note{margin-top:22px;font-size:.9rem;color:var(--ink-soft);max-width:60ch}
+
+  /* ---------- Identity band ---------- */
+  .band{
+    background:var(--green-deep);color:var(--wheat);text-align:center;position:relative;overflow:hidden;
+  }
+  .band::after{ /* faint field rows */
+    content:"";position:absolute;inset:0;opacity:.10;
+    background:repeating-linear-gradient(115deg,transparent 0 22px,rgba(239,227,196,.6) 22px 23px);
+  }
+  .band .q{position:relative;font-family:var(--serif);font-weight:500;letter-spacing:-.01em;
+    font-size:clamp(1.7rem,4.5vw,2.8rem);line-height:1.18;max-width:20ch;margin:0 auto}
+  .band .q em{font-style:italic;color:#fff}
+  .band small{position:relative;display:block;margin-top:18px;color:rgba(239,227,196,.72);
+    font-size:.9rem;letter-spacing:.05em}
+
+  /* ---------- Support ---------- */
+  .support{text-align:center}
+  .support .sec-title,.support .sec-intro{margin-left:auto;margin-right:auto}
+  .support .sec-intro{margin-bottom:28px}
+  .cta{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--barn);color:#fff;text-decoration:none;font-weight:600;font-size:1.05rem;
+    padding:15px 30px;border-radius:14px;box-shadow:var(--shadow-sm);
+    transition:transform .2s,box-shadow .2s,filter .2s;
+  }
+  .cta:hover{transform:translateY(-3px);box-shadow:var(--shadow);filter:saturate(1.1)}
+  .support .respond{margin-top:16px;font-size:.9rem;color:var(--ink-soft)}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--ink);color:var(--wheat);padding:52px 0 40px}
+  .foot-top{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:flex-start}
+  .foot-brand{display:flex;align-items:center;gap:12px}
+  .foot-brand img{width:40px;height:40px;border-radius:11px}
+  .foot-brand b{font-family:var(--serif);font-size:1.3rem}
+  .foot-brand span{display:block;font-size:.85rem;color:rgba(239,227,196,.62)}
+  .foot-links{display:flex;flex-wrap:wrap;gap:22px;font-size:.95rem;font-weight:500}
+  .foot-links a{color:var(--wheat);text-decoration:none;opacity:.85;transition:opacity .2s}
+  .foot-links a:hover{opacity:1;text-decoration:underline}
+  .foot-bottom{
+    margin-top:34px;padding-top:22px;border-top:1px solid rgba(239,227,196,.16);
+    display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;
+    font-size:.85rem;color:rgba(239,227,196,.6)
+  }
+  .privacy-badge{display:inline-flex;align-items:center;gap:8px;
+    border:1px solid rgba(239,227,196,.25);border-radius:999px;padding:6px 14px;color:var(--wheat)}
+
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  @keyframes pop{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="hero">
-            <img src="app-icon.png" alt="BredDay App Icon" class="app-icon">
-            <h1>BredDay</h1>
-            <p class="tagline">Breeding date in, due date out — for cattle, horses, goats, sheep, pigs, rabbits, alpacas &amp; llamas. No ads. Works offline.</p>
 
-            <div class="links">
-                <a href="privacy.html" class="link-card">
-                    <div class="link-icon">
-                        <span role="img" aria-label="privacy">&#128274;</span>
-                    </div>
-                    <div class="link-content">
-                        <div class="link-title">Privacy Policy</div>
-                        <div class="link-description">How we protect your data and privacy</div>
-                    </div>
-                </a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top"><img src="app-icon.png" alt="BredDay icon"><b>BredDay</b></a>
+    <nav class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#gestation">Species</a>
+      <a href="#support">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+  </div>
+</header>
 
-                <a href="terms.html" class="link-card">
-                    <div class="link-icon">
-                        <span role="img" aria-label="terms">&#128220;</span>
-                    </div>
-                    <div class="link-content">
-                        <div class="link-title">Terms of Use</div>
-                        <div class="link-description">Terms and conditions for using BredDay</div>
-                    </div>
-                </a>
-            </div>
-        </div>
+<main id="top">
 
-        <div class="contact-section">
-            <h2>Need Help?</h2>
-            <p>Have questions, feedback, or need support? We're here to help.</p>
-            <a href="mailto:braniapps@gmail.com" class="email-link">Contact Support</a>
-        </div>
-
-        <div class="footer">
-            <p>&copy; 2026 Paulo Branicio. All rights reserved.</p>
-        </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <img src="app-icon.png" alt="BredDay app icon — a cow" class="hero-icon">
+      <h1>BredDay</h1>
+      <p class="lede">Breeding date in, due date out.</p>
+      <p class="sub">The livestock gestation &amp; breeding calculator built for the barn — for cattle, horses, goats, sheep, pigs, rabbits, alpacas &amp; llamas.</p>
+      <div class="chips">
+        <span class="chip">🚫 No ads, ever</span>
+        <span class="chip">📶 Works offline</span>
+        <span class="chip">🔒 No tracking</span>
+        <span class="chip">🐄 8 species</span>
+      </div>
+      <p class="platform">For <b>iPhone</b> · iOS 17+ · Free 2-week trial</p>
     </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="wrap">
+      <span class="eyebrow">What BredDay does</span>
+      <h2 class="sec-title">Everything you need from breeding to birth</h2>
+      <p class="sec-intro">One tidy app for the whole cycle — figure the due date, keep the herd, and never miss a checkpoint, all without a signal.</p>
+
+      <div class="grid">
+        <article class="feature">
+          <div class="badge">📅</div>
+          <h3>Due dates you can trust</h3>
+          <p>Enter the breeding date and get the estimated due date instantly — with breed-specific gestation lengths and a per-animal override when you know your stock better than any table.</p>
+        </article>
+
+        <article class="feature">
+          <div class="badge">🐮</div>
+          <h3>Your whole herd, in order</h3>
+          <p>Log every animal, track breeding history and outcomes (live &amp; lost), and see who's closest to due at a glance — sorted and color-coded by how soon.</p>
+        </article>
+
+        <article class="feature">
+          <span class="tag">New</span>
+          <div class="badge">✅</div>
+          <h3>Checkpoints &amp; reminders</h3>
+          <p>Vet-informed checkpoint templates for every species — <strong>plus your own custom checkpoints</strong> to match how your farm actually runs, each with an optional local reminder.</p>
+        </article>
+
+        <article class="feature">
+          <div class="badge">🗓️</div>
+          <h3>Calendar view</h3>
+          <p>Every due date and checkpoint laid out on a month calendar, so nothing sneaks up on you mid-season.</p>
+        </article>
+
+        <article class="feature">
+          <div class="badge">📲</div>
+          <h3>Home-screen widget</h3>
+          <p>A countdown right on your home screen — “Bessie · 14d” — and the next three coming up. Glance, don't dig.</p>
+        </article>
+
+        <article class="feature">
+          <div class="badge">⚡</div>
+          <h3>Quick Calc</h3>
+          <p>Need a fast answer at the chute? Pick a species and a date — due date on the spot, nothing to save.</p>
+        </article>
+
+        <article class="feature wide">
+          <div class="badge">🔒</div>
+          <h3>Private by design — and it works in the barn</h3>
+          <p>100% offline: no signal, no problem, and no account to create. No ads, no analytics, no tracking — your herd data never leaves your phone (the App Store label reads <em>Data Not Collected</em>). Export the whole herd to CSV any time it needs to go elsewhere.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- GESTATION ALMANAC -->
+  <section id="gestation" class="almanac">
+    <div class="wrap">
+      <span class="eyebrow">Gestation at a glance</span>
+      <h2 class="sec-title">Eight species, hard-coded and offline</h2>
+      <div class="species">
+        <div class="beast"><span class="em">🐄</span><div class="nm">Cattle</div><div class="dy">283</div><div class="un">days</div></div>
+        <div class="beast"><span class="em">🐴</span><div class="nm">Horse</div><div class="dy">340</div><div class="un">days</div></div>
+        <div class="beast"><span class="em">🐐</span><div class="nm">Goat</div><div class="dy">150</div><div class="un">days</div></div>
+        <div class="beast"><span class="em">🐑</span><div class="nm">Sheep</div><div class="dy">147</div><div class="un">days</div></div>
+        <div class="beast"><span class="em">🐷</span><div class="nm">Pig</div><div class="dy">114</div><div class="un">days</div></div>
+        <div class="beast"><span class="em">🐰</span><div class="nm">Rabbit</div><div class="dy">31</div><div class="un">days</div></div>
+        <div class="beast"><span class="em">🦙</span><div class="nm">Alpaca</div><div class="dy">345</div><div class="un">days</div></div>
+        <div class="beast"><span class="em">🦙</span><div class="nm">Llama</div><div class="dy">350</div><div class="un">days</div></div>
+      </div>
+      <p class="note">Averages drawn from published university-extension gestation tables, with breed adjustments built in. Every herd is different — override the length on any animal. Checkpoint templates describe common practice, not veterinary advice; confirm timing with your vet.</p>
+    </div>
+  </section>
+
+  <!-- IDENTITY BAND -->
+  <section class="band">
+    <div class="wrap">
+      <p class="q">No ads. No accounts. <em>Works with no signal in the barn.</em></p>
+      <small>That's the whole promise.</small>
+    </div>
+  </section>
+
+  <!-- SUPPORT -->
+  <section id="support" class="support">
+    <div class="wrap">
+      <span class="eyebrow" style="justify-content:center">Need a hand?</span>
+      <h2 class="sec-title">We're here to help</h2>
+      <p class="sec-intro">Questions, feedback, a species or breed you'd like added, or a bug to report — send a note and a real person will read it.</p>
+      <a class="cta" href="mailto:braniapps@gmail.com">✉️ Email support</a>
+      <p class="respond">braniapps@gmail.com · we aim to reply within a couple of days</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="app-icon.png" alt="BredDay icon">
+        <div>
+          <b>BredDay</b>
+          <span>Livestock gestation &amp; breeding calculator</span>
+        </div>
+      </div>
+      <nav class="foot-links">
+        <a href="https://branicio.github.io/bredday-support/">Support</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="mailto:braniapps@gmail.com">Contact</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Paulo Branicio. Made for ranchers &amp; smallholders.</span>
+      <span class="privacy-badge">🔒 Data Not Collected</span>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
