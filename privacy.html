@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — BredDay</title>
-<meta name="description" content="BredDay's privacy policy. We collect nothing — the app works fully offline and your herd data never leaves your device.">
+<meta name="description" content="BredDay's privacy policy. We collect nothing — the app works fully offline and your herd data never leaves your device. In English, Portuguese and Spanish.">
 <link rel="icon" href="app-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="site.js" defer></script>
 <style>
   :root{
     --paper:#F4EAD2;--paper-2:#FBF6E8;--card:#FCF9EF;
@@ -29,15 +30,37 @@
   ::selection{background:var(--amber);color:#fff}
   .wrap{max-width:820px;margin:0 auto;padding:0 22px}
 
-  header{position:sticky;top:0;z-index:50;background:rgba(244,234,210,.82);backdrop-filter:saturate(150%) blur(10px);border-bottom:1px solid var(--hair)}
-  .nav{max-width:1060px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;height:64px}
+  header.site{position:sticky;top:0;z-index:50;background:rgba(244,234,210,.82);backdrop-filter:saturate(150%) blur(10px);border-bottom:1px solid var(--hair)}
+  .nav{max-width:1060px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;height:64px}
   .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);font-weight:600}
   .brand img{width:34px;height:34px;border-radius:9px;box-shadow:var(--shadow-sm)}
   .brand b{font-family:var(--serif);font-size:1.32rem;font-weight:600;letter-spacing:-.01em}
-  .nav-links{display:flex;gap:26px;font-size:.93rem;font-weight:500}
+  .nav-links{display:flex;gap:26px;font-size:.93rem;font-weight:500;margin-left:auto}
   .nav-links a{text-decoration:none;color:var(--ink-soft);transition:color .2s}
   .nav-links a:hover,.nav-links a.active{color:var(--green-deep)}
   @media(max-width:640px){.nav-links{display:none}}
+
+  /* ---------- Language switch ----------
+     .langtabs is the role="tablist"; site.js maintains aria-selected,
+     aria-controls and tabindex on the buttons. Hidden without JS: all three
+     languages already render stacked then, so a switch that cannot switch
+     anything would only be a trap. */
+  .langtabs{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(--paper-2);border:1px solid var(--hair);flex:none}
+  .langtabs [role="tab"]{appearance:none;-webkit-appearance:none;border:0;background:transparent;cursor:pointer;padding:7px 12px;border-radius:999px;font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.08em;color:var(--ink-soft);transition:color .2s,background-color .2s}
+  .langtabs [role="tab"]:hover{color:var(--green-deep);background:var(--wheat)}
+  .langtabs [role="tab"][aria-selected="true"]{background:var(--green-deep);color:var(--wheat);font-weight:800}
+  .langtabs [role="tab"]:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  html:not([data-js="on"]) .langtabs{display:none}
+
+  /* Languages are hidden ONLY when site.js has announced itself by setting
+     data-js on <html>. If the script never runs or throws, this selector
+     stops matching and all three languages render stacked — readable,
+     anchor-navigable, and complete. Showing the wrong language is cosmetic;
+     showing none would be a legal-content outage. Never hide [data-lang]
+     outside an html[data-js="on"] scope. */
+  html[data-js="on"] [data-lang]{display:none}
+  html[data-js="on"] [data-lang][data-lang-active]{display:block}
+  html:not([data-js="on"]) [data-lang] + [data-lang]{border-top:2px solid var(--hair)}
 
   .doc-hero{text-align:center;padding:58px 0 6px}
   .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--barn);margin-bottom:14px}
@@ -82,116 +105,349 @@
 </head>
 <body>
 
-<header>
+<!-- Chrome: lives outside every [data-lang] section, so its text is swapped by
+     site.js from the data-i18n-* attributes rather than by duplication. The
+     three tab labels stay untranslated: a language's own endonym initials are
+     correct in every locale. -->
+<header class="site">
   <div class="nav">
     <a class="brand" href="index.html"><img src="app-icon.png" alt="BredDay icon"><b>BredDay</b></a>
-    <nav class="nav-links">
-      <a href="index.html#features">Features</a>
-      <a href="index.html#support">Support</a>
-      <a href="privacy.html" class="active">Privacy</a>
-      <a href="terms.html">Terms</a>
+    <nav class="nav-links" aria-label="Main" data-i18n-aria-en="Main" data-i18n-aria-pt="Principal" data-i18n-aria-es="Principal">
+      <a href="index.html" data-i18n-en="Home" data-i18n-pt="Início" data-i18n-es="Inicio">Home</a>
+      <a href="privacy.html" class="active" aria-current="page" data-i18n-en="Privacy" data-i18n-pt="Privacidade" data-i18n-es="Privacidad">Privacy</a>
+      <a href="terms.html" data-i18n-en="Terms" data-i18n-pt="Termos" data-i18n-es="Términos">Terms</a>
     </nav>
+    <div class="langtabs" role="tablist" aria-label="Language" data-i18n-aria-en="Language" data-i18n-aria-pt="Idioma" data-i18n-aria-es="Idioma">
+      <button type="button" role="tab" data-lang-target="en" aria-label="English">EN</button>
+      <button type="button" role="tab" data-lang-target="pt" aria-label="Português">PT</button>
+      <button type="button" role="tab" data-lang-target="es" aria-label="Español">ES</button>
+    </div>
   </div>
 </header>
 
 <main>
-  <div class="wrap">
-    <div class="doc-hero">
-      <span class="eyebrow">Legal</span>
-      <h1>Privacy Policy</h1>
-      <p class="app">BredDay — Livestock Gestation &amp; Breeding Calculator</p>
-      <span class="date">Effective Date: July 22, 2026</span>
+
+  <!-- ============================================================ ENGLISH ==
+       site.js stamps role="tabpanel", id, and aria-hidden on this element.
+       Never hand-author those. Portuguese and Spanish are exact structural
+       copies of this block with data-lang / lang / aria-label and the copy
+       swapped.
+
+       id="portugues" and id="espanol" on the sections below are the only
+       hand-authored ids besides id="top": they are the deep-link anchors the
+       BredDay app links to (privacy.html#portugues / #espanol / #top) and
+       site.js maps them to a language. id="top" stays on the English <h1>
+       alone — ids must be unique. -->
+  <section data-lang="en" lang="en" aria-label="English">
+
+    <div class="wrap">
+      <div class="doc-hero">
+        <span class="eyebrow">Legal</span>
+        <h1 id="top">Privacy Policy</h1>
+        <p class="app">BredDay — Livestock Gestation &amp; Breeding Calculator</p>
+        <span class="date">Effective Date: July 22, 2026</span>
+      </div>
+
+      <article class="doc">
+        <div class="callout">
+          <strong>Our Commitment:</strong> BredDay is designed with your privacy as a priority. We do not collect, store, or share any personal information. The app works fully offline — your herd data never leaves your device.
+        </div>
+
+        <h2>Information We Collect</h2>
+        <p>BredDay does not collect any personal information. All data is created and stored locally on your device, using the operating system's on-device storage:</p>
+        <ul>
+          <li><strong>Herd Data:</strong> Your animals, breeding records, due dates, checkpoints, birth outcomes, sire information, and notes are stored locally on your device only.</li>
+          <li><strong>User Preferences:</strong> Your settings (such as reminder defaults, per-animal gestation overrides, and your acknowledgment of the in-app disclaimer) are stored locally on your device.</li>
+          <li><strong>Widget Data:</strong> The home-screen widget reads a small snapshot of your upcoming due dates from a shared container on your device. It is never transmitted anywhere.</li>
+        </ul>
+
+        <h2>Information We Do NOT Collect</h2>
+        <p>BredDay does <strong>not</strong> collect, store, or transmit:</p>
+        <ul>
+          <li>Personal identification information (name, email, phone number)</li>
+          <li>Location data</li>
+          <li>Usage analytics or tracking data</li>
+          <li>Device identifiers</li>
+          <li>Any data from other apps on your device</li>
+        </ul>
+
+        <h2>Notifications</h2>
+        <p>BredDay can send reminders for breeding checkpoints and due dates. These notifications are:</p>
+        <ul>
+          <li>Scheduled and delivered entirely on your device</li>
+          <li>Not push notifications — no external server is involved</li>
+          <li>Fully controlled by your device's notification settings</li>
+        </ul>
+
+        <h2>CSV Export</h2>
+        <p>BredDay Pro can export your herd log as a CSV file. Export happens only when you initiate it, and the file is handed to your device's system share sheet so you choose exactly where it goes (email, cloud storage, messaging, etc.). We never see or receive your exported data.</p>
+
+        <h2>Third-Party Services</h2>
+        <p>BredDay does not use any third-party services, external APIs, analytics tools, advertising SDKs, or tracking technologies. We do not collect usage statistics, crash reports, or behavioral data. The app requires no internet connection to function.</p>
+
+        <h2>Data Storage</h2>
+        <p>All data is stored locally on your device:</p>
+        <ul>
+          <li>Animal and breeding records, checkpoints, and outcomes</li>
+          <li>User preferences and settings</li>
+          <li>Subscription status (managed by the app store)</li>
+        </ul>
+        <p>We do not operate servers that store your personal data. We have no user accounts and no cloud sync features. Your data is protected by your device's built-in security, and you can remove it at any time by deleting the app.</p>
+
+        <h2>Your Data Rights</h2>
+        <p>Privacy regulations such as the GDPR and the California Consumer Privacy Act (CCPA/CPRA) grant you rights over personal data that companies hold about you. Because BredDay collects no personal data, we hold none — there is nothing for us to access, correct, export, or delete on your behalf. Your herd data exists only on your device and is entirely under your control; deleting the app deletes it.</p>
+
+        <h2>Subscriptions</h2>
+        <p>Using BredDay requires a Pro subscription. All subscription management and payment processing is handled entirely by the app store you downloaded BredDay from — such as the Apple App Store or Google Play. We do not have access to your payment information, credit-card details, or store account. Subscriptions can be managed or cancelled in your app store account settings. This Privacy Policy covers the BredDay app only — your app store's handling of your purchase information is described in its own privacy policy (for example, <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple's Privacy Policy</a> or <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>).</p>
+
+        <h2>Children's Privacy</h2>
+        <p>BredDay does not knowingly collect any personal information from children. The app is rated for all ages and contains no objectionable content.</p>
+
+        <h2>Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated effective date.</p>
+
+        <div class="contact">
+          <h2>Contact Us</h2>
+          <p>If you have any questions about this Privacy Policy, please contact us at:</p>
+          <a class="mail" href="mailto:braniapps@gmail.com">braniapps@gmail.com</a>
+        </div>
+
+        <a class="doc-back" href="index.html">← Back to Support</a>
+      </article>
     </div>
 
-    <article class="doc">
-      <div class="callout">
-        <strong>Our Commitment:</strong> BredDay is designed with your privacy as a priority. We do not collect, store, or share any personal information. The app works fully offline — your herd data never leaves your device.
+    <footer>
+      <div class="wrap" style="max-width:1060px">
+        <div class="foot-top">
+          <div class="foot-brand">
+            <img src="app-icon.png" alt="BredDay icon">
+            <div><b>BredDay</b><span>Livestock gestation &amp; breeding calculator</span></div>
+          </div>
+          <nav class="foot-links">
+            <a href="index.html">Support</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Use</a>
+            <a href="mailto:braniapps@gmail.com">Contact</a>
+          </nav>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 BredDay. All rights reserved.</span>
+          <span class="privacy-badge">🔒 Data Not Collected</span>
+        </div>
+      </div>
+    </footer>
+
+  </section>
+
+  <!-- ======================================================== PORTUGUÊS ==
+       Clone estrutural do bloco em inglês: mesmos elementos, mesmas classes,
+       mesma ordem — só o texto e data-lang / id / lang / aria-label mudam. -->
+  <section data-lang="pt" id="portugues" lang="pt-BR" aria-label="Português">
+
+    <div class="wrap">
+      <div class="doc-hero">
+        <span class="eyebrow">Legal</span>
+        <h1>Política de Privacidade</h1>
+        <p class="app">BredDay — Calculadora de Gestação e Manejo Reprodutivo</p>
+        <span class="date">Data de vigência: 22 de julho de 2026</span>
       </div>
 
-      <h2>Information We Collect</h2>
-      <p>BredDay does not collect any personal information. All data is created and stored locally on your device, using the operating system's on-device storage:</p>
-      <ul>
-        <li><strong>Herd Data:</strong> Your animals, breeding records, due dates, checkpoints, birth outcomes, sire information, and notes are stored locally on your device only.</li>
-        <li><strong>User Preferences:</strong> Your settings (such as reminder defaults, per-animal gestation overrides, and your acknowledgment of the in-app disclaimer) are stored locally on your device.</li>
-        <li><strong>Widget Data:</strong> The home-screen widget reads a small snapshot of your upcoming due dates from a shared container on your device. It is never transmitted anywhere.</li>
-      </ul>
+      <article class="doc">
+        <div class="callout">
+          <strong>Nosso compromisso:</strong> o BredDay foi criado com a sua privacidade como prioridade. Não coletamos, armazenamos nem compartilhamos nenhuma informação pessoal. O aplicativo funciona totalmente offline — os dados do seu rebanho nunca saem do seu dispositivo.
+        </div>
 
-      <h2>Information We Do NOT Collect</h2>
-      <p>BredDay does <strong>not</strong> collect, store, or transmit:</p>
-      <ul>
-        <li>Personal identification information (name, email, phone number)</li>
-        <li>Location data</li>
-        <li>Usage analytics or tracking data</li>
-        <li>Device identifiers</li>
-        <li>Any data from other apps on your device</li>
-      </ul>
+        <h2>Quais informações coletamos</h2>
+        <p>O BredDay não coleta nenhuma informação pessoal. Todos os dados são criados e armazenados localmente no seu dispositivo, usando o armazenamento do próprio sistema operacional:</p>
+        <ul>
+          <li><strong>Dados do rebanho:</strong> seus animais, registros de cobertura, previsões de parto, etapas de manejo, resultados das parições, informações do reprodutor e anotações ficam armazenados apenas no seu dispositivo.</li>
+          <li><strong>Preferências:</strong> seus ajustes (como o padrão de lembretes, os dias de gestação definidos por animal e a sua confirmação do aviso exibido no aplicativo) ficam armazenados localmente no seu dispositivo.</li>
+          <li><strong>Dados do widget:</strong> o widget da tela de início lê um pequeno resumo dos próximos partos a partir de um contêiner compartilhado no seu dispositivo. Ele nunca é transmitido para lugar nenhum.</li>
+        </ul>
 
-      <h2>Notifications</h2>
-      <p>BredDay can send reminders for breeding checkpoints and due dates. These notifications are:</p>
-      <ul>
-        <li>Scheduled and delivered entirely on your device</li>
-        <li>Not push notifications — no external server is involved</li>
-        <li>Fully controlled by your device's notification settings</li>
-      </ul>
+        <h2>O que NÃO coletamos</h2>
+        <p>O BredDay <strong>não</strong> coleta, armazena nem transmite:</p>
+        <ul>
+          <li>Informações de identificação pessoal (nome, e-mail, telefone)</li>
+          <li>Dados de localização</li>
+          <li>Estatísticas de uso ou dados de rastreamento</li>
+          <li>Identificadores do dispositivo</li>
+          <li>Qualquer dado de outros aplicativos do seu dispositivo</li>
+        </ul>
 
-      <h2>CSV Export</h2>
-      <p>BredDay Pro can export your herd log as a CSV file. Export happens only when you initiate it, and the file is handed to your device's system share sheet so you choose exactly where it goes (email, cloud storage, messaging, etc.). We never see or receive your exported data.</p>
+        <h2>Notificações</h2>
+        <p>O BredDay pode enviar lembretes das etapas de manejo e dos partos previstos. Essas notificações são:</p>
+        <ul>
+          <li>Agendadas e entregues inteiramente no seu dispositivo</li>
+          <li>Locais, não notificações push — nenhum servidor externo participa</li>
+          <li>Totalmente controladas pelos ajustes de notificação do seu dispositivo</li>
+        </ul>
 
-      <h2>Third-Party Services</h2>
-      <p>BredDay does not use any third-party services, external APIs, analytics tools, advertising SDKs, or tracking technologies. We do not collect usage statistics, crash reports, or behavioral data. The app requires no internet connection to function.</p>
+        <h2>Exportação em CSV</h2>
+        <p>O BredDay Pro pode exportar o registro do seu rebanho como um arquivo CSV. A exportação só acontece quando você decide iniciá-la, e o arquivo é entregue ao menu de compartilhamento do sistema, para você escolher exatamente para onde ele vai (e-mail, nuvem, mensagens etc.). Nós nunca vemos nem recebemos os dados exportados.</p>
 
-      <h2>Data Storage</h2>
-      <p>All data is stored locally on your device:</p>
-      <ul>
-        <li>Animal and breeding records, checkpoints, and outcomes</li>
-        <li>User preferences and settings</li>
-        <li>Subscription status (managed by the app store)</li>
-      </ul>
-      <p>We do not operate servers that store your personal data. We have no user accounts and no cloud sync features. Your data is protected by your device's built-in security, and you can remove it at any time by deleting the app.</p>
+        <h2>Serviços de terceiros</h2>
+        <p>O BredDay não usa serviços de terceiros, APIs externas, ferramentas de análise, SDKs de publicidade nem tecnologias de rastreamento. Não coletamos estatísticas de uso, relatórios de falhas nem dados de comportamento. O aplicativo não precisa de conexão com a internet para funcionar.</p>
 
-      <h2>Your Data Rights</h2>
-      <p>Privacy regulations such as the GDPR and the California Consumer Privacy Act (CCPA/CPRA) grant you rights over personal data that companies hold about you. Because BredDay collects no personal data, we hold none — there is nothing for us to access, correct, export, or delete on your behalf. Your herd data exists only on your device and is entirely under your control; deleting the app deletes it.</p>
+        <h2>Armazenamento de dados</h2>
+        <p>Todos os dados ficam armazenados localmente no seu dispositivo:</p>
+        <ul>
+          <li>Registros de animais e coberturas, etapas de manejo e resultados</li>
+          <li>Preferências e ajustes</li>
+          <li>Status da assinatura (gerenciado pela loja de aplicativos)</li>
+        </ul>
+        <p>Não operamos servidores que armazenem seus dados pessoais. Não há contas de usuário nem sincronização na nuvem. Seus dados são protegidos pela segurança do próprio dispositivo, e você pode removê-los a qualquer momento excluindo o aplicativo.</p>
 
-      <h2>Subscriptions</h2>
-      <p>Using BredDay requires a Pro subscription. All subscription management and payment processing is handled entirely by the app store you downloaded BredDay from — such as the Apple App Store or Google Play. We do not have access to your payment information, credit-card details, or store account. Subscriptions can be managed or cancelled in your app store account settings. This Privacy Policy covers the BredDay app only — your app store's handling of your purchase information is described in its own privacy policy (for example, <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple's Privacy Policy</a> or <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>).</p>
+        <h2>Seus direitos sobre os dados</h2>
+        <p>Normas de privacidade como o RGPD europeu (GDPR) e a California Consumer Privacy Act (CCPA/CPRA) garantem a você direitos sobre os dados pessoais que as empresas mantêm a seu respeito. Como o BredDay não coleta dados pessoais, não mantemos nenhum — não há nada que possamos acessar, corrigir, exportar ou excluir em seu nome. Os dados do seu rebanho existem apenas no seu dispositivo e estão inteiramente sob o seu controle; excluir o aplicativo os apaga.</p>
 
-      <h2>Children's Privacy</h2>
-      <p>BredDay does not knowingly collect any personal information from children. The app is rated for all ages and contains no objectionable content.</p>
+        <h2>Assinaturas</h2>
+        <p>Usar o BredDay exige uma assinatura Pro. Toda a gestão da assinatura e o processamento do pagamento são feitos inteiramente pela loja de aplicativos de onde você baixou o BredDay — como a App Store da Apple ou o Google Play. Não temos acesso às suas informações de pagamento, aos dados do cartão nem à conta da loja. As assinaturas podem ser gerenciadas ou canceladas nas configurações da sua conta na loja. Esta Política de Privacidade cobre apenas o aplicativo BredDay — o tratamento das informações da sua compra pela loja é descrito na política de privacidade dela (por exemplo, a <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Política de Privacidade da Apple</a> ou a <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidade do Google</a>).</p>
 
-      <h2>Changes to This Policy</h2>
-      <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated effective date.</p>
+        <h2>Privacidade das crianças</h2>
+        <p>O BredDay não coleta conscientemente informações pessoais de crianças. O aplicativo é classificado para todas as idades e não contém conteúdo impróprio.</p>
 
-      <div class="contact">
-        <h2>Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, please contact us at:</p>
-        <a class="mail" href="mailto:braniapps@gmail.com">braniapps@gmail.com</a>
+        <h2>Alterações nesta política</h2>
+        <p>Podemos atualizar esta Política de Privacidade de tempos em tempos. Qualquer alteração será publicada nesta página com uma nova data de vigência.</p>
+
+        <div class="contact">
+          <h2>Fale conosco</h2>
+          <p>Se você tiver qualquer dúvida sobre esta Política de Privacidade, escreva para:</p>
+          <a class="mail" href="mailto:braniapps@gmail.com">braniapps@gmail.com</a>
+        </div>
+
+        <a class="doc-back" href="index.html">← Voltar ao Suporte</a>
+      </article>
+    </div>
+
+    <footer>
+      <div class="wrap" style="max-width:1060px">
+        <div class="foot-top">
+          <div class="foot-brand">
+            <img src="app-icon.png" alt="Ícone do BredDay">
+            <div><b>BredDay</b><span>Calculadora de gestação e manejo reprodutivo</span></div>
+          </div>
+          <nav class="foot-links">
+            <a href="index.html">Suporte</a>
+            <a href="privacy.html">Política de Privacidade</a>
+            <a href="terms.html">Termos de Uso</a>
+            <a href="mailto:braniapps@gmail.com">Contato</a>
+          </nav>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 BredDay. Todos os direitos reservados.</span>
+          <span class="privacy-badge">🔒 Dados não coletados</span>
+        </div>
+      </div>
+    </footer>
+
+  </section>
+
+  <!-- ========================================================== ESPAÑOL ==
+       Clon estructural del bloque en inglés: mismos elementos, mismas clases,
+       mismo orden — solo cambian el texto y data-lang / id / lang / aria-label. -->
+  <section data-lang="es" id="espanol" lang="es" aria-label="Español">
+
+    <div class="wrap">
+      <div class="doc-hero">
+        <span class="eyebrow">Legal</span>
+        <h1>Política de Privacidad</h1>
+        <p class="app">BredDay — Calculadora de Gestación y Reproducción</p>
+        <span class="date">Fecha de entrada en vigor: 22 de julio de 2026</span>
       </div>
 
-      <a class="doc-back" href="index.html">← Back to Support</a>
-    </article>
-  </div>
+      <article class="doc">
+        <div class="callout">
+          <strong>Nuestro compromiso:</strong> BredDay está diseñado con tu privacidad como prioridad. No recopilamos, almacenamos ni compartimos ninguna información personal. La app funciona completamente sin conexión: los datos de tu hato nunca salen de tu dispositivo.
+        </div>
+
+        <h2>Qué información recopilamos</h2>
+        <p>BredDay no recopila ninguna información personal. Todos los datos se crean y se guardan localmente en tu dispositivo, usando el almacenamiento del propio sistema operativo:</p>
+        <ul>
+          <li><strong>Datos del hato:</strong> tus animales, registros de monta, fechas probables de parto, revisiones, resultados de los partos, datos del semental y notas se guardan únicamente en tu dispositivo.</li>
+          <li><strong>Preferencias:</strong> tus ajustes (como los recordatorios predeterminados, los días de gestación fijados por animal y tu confirmación del aviso que muestra la app) se guardan localmente en tu dispositivo.</li>
+          <li><strong>Datos del widget:</strong> el widget de la pantalla de inicio lee un pequeño resumen de los próximos partos desde un contenedor compartido en tu dispositivo. Nunca se transmite a ningún lado.</li>
+        </ul>
+
+        <h2>Qué NO recopilamos</h2>
+        <p>BredDay <strong>no</strong> recopila, almacena ni transmite:</p>
+        <ul>
+          <li>Información de identificación personal (nombre, correo electrónico, teléfono)</li>
+          <li>Datos de ubicación</li>
+          <li>Analíticas de uso o datos de rastreo</li>
+          <li>Identificadores del dispositivo</li>
+          <li>Ningún dato de otras apps de tu dispositivo</li>
+        </ul>
+
+        <h2>Notificaciones</h2>
+        <p>BredDay puede enviar recordatorios de las revisiones y de las fechas probables de parto. Estas notificaciones:</p>
+        <ul>
+          <li>Se programan y se entregan por completo en tu dispositivo</li>
+          <li>No son notificaciones push: no interviene ningún servidor externo</li>
+          <li>Se controlan por completo desde los ajustes de notificaciones de tu dispositivo</li>
+        </ul>
+
+        <h2>Exportación a CSV</h2>
+        <p>BredDay Pro puede exportar el registro de tu hato como un archivo CSV. La exportación solo ocurre cuando tú la inicias, y el archivo pasa al menú Compartir del sistema para que elijas exactamente a dónde va (correo, nube, mensajes, etc.). Nunca vemos ni recibimos tus datos exportados.</p>
+
+        <h2>Servicios de terceros</h2>
+        <p>BredDay no usa servicios de terceros, APIs externas, herramientas de analítica, SDKs de publicidad ni tecnologías de rastreo. No recopilamos estadísticas de uso, informes de fallos ni datos de comportamiento. La app no necesita conexión a internet para funcionar.</p>
+
+        <h2>Almacenamiento de datos</h2>
+        <p>Todos los datos se guardan localmente en tu dispositivo:</p>
+        <ul>
+          <li>Registros de animales y montas, revisiones y resultados</li>
+          <li>Preferencias y ajustes</li>
+          <li>Estado de la suscripción (gestionado por la tienda de aplicaciones)</li>
+        </ul>
+        <p>No operamos servidores que almacenen tus datos personales. No hay cuentas de usuario ni sincronización en la nube. Tus datos están protegidos por la seguridad del propio dispositivo, y puedes eliminarlos en cualquier momento borrando la app.</p>
+
+        <h2>Tus derechos sobre los datos</h2>
+        <p>Normas de privacidad como el RGPD europeo (GDPR) y la California Consumer Privacy Act (CCPA/CPRA) te otorgan derechos sobre los datos personales que las empresas guardan sobre ti. Como BredDay no recopila datos personales, no guardamos ninguno: no hay nada que podamos consultar, corregir, exportar ni eliminar en tu nombre. Los datos de tu hato existen solo en tu dispositivo y están completamente bajo tu control; al borrar la app, se borran con ella.</p>
+
+        <h2>Suscripciones</h2>
+        <p>Usar BredDay requiere una suscripción Pro. Toda la gestión de la suscripción y el procesamiento del pago corren por cuenta de la tienda de aplicaciones desde la que descargaste BredDay — como el App Store de Apple o Google Play. No tenemos acceso a tu información de pago, a los datos de tu tarjeta ni a tu cuenta de la tienda. Puedes gestionar o cancelar la suscripción en la configuración de tu cuenta de la tienda. Esta Política de Privacidad cubre solo la app BredDay: el tratamiento que la tienda hace de la información de tu compra se describe en su propia política de privacidad (por ejemplo, la <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Política de Privacidad de Apple</a> o la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidad de Google</a>).</p>
+
+        <h2>Privacidad de los menores</h2>
+        <p>BredDay no recopila conscientemente información personal de menores. La app está clasificada para todas las edades y no contiene contenido inapropiado.</p>
+
+        <h2>Cambios en esta política</h2>
+        <p>Podemos actualizar esta Política de Privacidad de vez en cuando. Cualquier cambio se publicará en esta página con una nueva fecha de entrada en vigor.</p>
+
+        <div class="contact">
+          <h2>Contáctanos</h2>
+          <p>Si tienes cualquier duda sobre esta Política de Privacidad, escríbenos a:</p>
+          <a class="mail" href="mailto:braniapps@gmail.com">braniapps@gmail.com</a>
+        </div>
+
+        <a class="doc-back" href="index.html">← Volver a Soporte</a>
+      </article>
+    </div>
+
+    <footer>
+      <div class="wrap" style="max-width:1060px">
+        <div class="foot-top">
+          <div class="foot-brand">
+            <img src="app-icon.png" alt="Ícono de BredDay">
+            <div><b>BredDay</b><span>Calculadora de gestación y reproducción</span></div>
+          </div>
+          <nav class="foot-links">
+            <a href="index.html">Soporte</a>
+            <a href="privacy.html">Política de Privacidad</a>
+            <a href="terms.html">Términos de Uso</a>
+            <a href="mailto:braniapps@gmail.com">Contacto</a>
+          </nav>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 BredDay. Todos los derechos reservados.</span>
+          <span class="privacy-badge">🔒 No se recopilan datos</span>
+        </div>
+      </div>
+    </footer>
+
+  </section>
+
 </main>
-
-<footer>
-  <div class="wrap" style="max-width:1060px">
-    <div class="foot-top">
-      <div class="foot-brand">
-        <img src="app-icon.png" alt="BredDay icon">
-        <div><b>BredDay</b><span>Livestock gestation &amp; breeding calculator</span></div>
-      </div>
-      <nav class="foot-links">
-        <a href="https://branicio.github.io/bredday-support/">Support</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="mailto:braniapps@gmail.com">Contact</a>
-      </nav>
-    </div>
-    <div class="foot-bottom">
-      <span>© 2026 BredDay. All rights reserved.</span>
-      <span class="privacy-badge">🔒 Data Not Collected</span>
-    </div>
-  </div>
-</footer>
 
 </body>
 </html>

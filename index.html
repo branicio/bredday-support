@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BredDay — Livestock Gestation &amp; Breeding Calculator</title>
-<meta name="description" content="BredDay is the offline gestation & breeding calculator for cattle, horses, goats, sheep, pigs, rabbits, alpacas & llamas. Due dates, checkpoints, reminders, and a countdown widget. No ads. No tracking.">
+<meta name="description" content="BredDay is the offline gestation & breeding calculator for cattle, horses, goats, sheep, pigs, rabbits, alpacas & llamas. Due dates, checkpoints, reminders, and a countdown widget. No ads. No tracking. In English, Portuguese and Spanish.">
 <link rel="icon" href="app-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="site.js" defer></script>
 <style>
   :root{
     --paper:#F4EAD2;
@@ -49,20 +50,41 @@
   .wrap{max-width:1060px;margin:0 auto;padding:0 22px}
 
   /* ---------- Header ---------- */
-  header{
+  header.site{
     position:sticky;top:0;z-index:50;
     background:rgba(244,234,210,.82);
     backdrop-filter:saturate(150%) blur(10px);
     border-bottom:1px solid var(--hair);
   }
-  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:14px;height:64px}
   .brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-weight:600}
   .brand img{width:34px;height:34px;border-radius:9px;box-shadow:var(--shadow-sm)}
   .brand b{font-family:var(--serif);font-size:1.32rem;font-weight:600;letter-spacing:-.01em}
-  .nav-links{display:flex;gap:26px;font-size:.93rem;font-weight:500}
+  .nav-links{display:flex;gap:26px;font-size:.93rem;font-weight:500;margin-left:auto}
   .nav-links a{text-decoration:none;color:var(--ink-soft);transition:color .2s}
-  .nav-links a:hover{color:var(--green-deep)}
+  .nav-links a:hover,.nav-links a.active{color:var(--green-deep)}
   @media(max-width:640px){.nav-links{display:none}}
+
+  /* ---------- Language switch ----------
+     .langtabs is the role="tablist"; site.js maintains aria-selected,
+     aria-controls and tabindex on the buttons. Hidden without JS: all three
+     languages already render stacked then, so a switch that cannot switch
+     anything would only be a trap. */
+  .langtabs{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(--paper-2);border:1px solid var(--hair);flex:none}
+  .langtabs [role="tab"]{appearance:none;-webkit-appearance:none;border:0;background:transparent;cursor:pointer;padding:7px 12px;border-radius:999px;font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.08em;color:var(--ink-soft);transition:color .2s,background-color .2s}
+  .langtabs [role="tab"]:hover{color:var(--green-deep);background:var(--wheat)}
+  .langtabs [role="tab"][aria-selected="true"]{background:var(--green-deep);color:var(--wheat);font-weight:800}
+  .langtabs [role="tab"]:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  html:not([data-js="on"]) .langtabs{display:none}
+
+  /* Languages are hidden ONLY when site.js has announced itself by setting
+     data-js on <html>. If the script never runs or throws, this selector
+     stops matching and all three languages render stacked — readable,
+     anchor-navigable, and complete. Never hide [data-lang] outside an
+     html[data-js="on"] scope. */
+  html[data-js="on"] [data-lang]{display:none}
+  html[data-js="on"] [data-lang][data-lang-active]{display:block}
+  html:not([data-js="on"]) [data-lang] + [data-lang]{border-top:2px solid var(--hair)}
 
   /* ---------- Hero ---------- */
   .hero{position:relative;text-align:center;padding:74px 0 64px;overflow:hidden}
@@ -102,7 +124,7 @@
   .platform b{color:var(--ink)}
 
   /* ---------- Section scaffolding ---------- */
-  section{padding:62px 0}
+  section.blk{padding:62px 0}
   .eyebrow{
     display:inline-flex;align-items:center;gap:9px;
     font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
@@ -206,155 +228,448 @@
 </head>
 <body>
 
-<header>
+<!-- Chrome: outside every [data-lang] section; site.js swaps its text via the
+     data-i18n-* attributes. Tab labels stay untranslated (endonym initials). -->
+<header class="site">
   <div class="wrap nav">
-    <a class="brand" href="#top"><img src="app-icon.png" alt="BredDay icon"><b>BredDay</b></a>
-    <nav class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#gestation">Species</a>
-      <a href="#support">Support</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
+    <a class="brand" href="index.html"><img src="app-icon.png" alt="BredDay icon"><b>BredDay</b></a>
+    <nav class="nav-links" aria-label="Main" data-i18n-aria-en="Main" data-i18n-aria-pt="Principal" data-i18n-aria-es="Principal">
+      <a href="index.html" class="active" aria-current="page" data-i18n-en="Home" data-i18n-pt="Início" data-i18n-es="Inicio">Home</a>
+      <a href="privacy.html" data-i18n-en="Privacy" data-i18n-pt="Privacidade" data-i18n-es="Privacidad">Privacy</a>
+      <a href="terms.html" data-i18n-en="Terms" data-i18n-pt="Termos" data-i18n-es="Términos">Terms</a>
     </nav>
+    <div class="langtabs" role="tablist" aria-label="Language" data-i18n-aria-en="Language" data-i18n-aria-pt="Idioma" data-i18n-aria-es="Idioma">
+      <button type="button" role="tab" data-lang-target="en" aria-label="English">EN</button>
+      <button type="button" role="tab" data-lang-target="pt" aria-label="Português">PT</button>
+      <button type="button" role="tab" data-lang-target="es" aria-label="Español">ES</button>
+    </div>
   </div>
 </header>
 
-<main id="top">
+<main>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="wrap">
-      <img src="app-icon.png" alt="BredDay app icon — a cow" class="hero-icon">
-      <h1>BredDay</h1>
-      <p class="lede">Breeding date in, due date out.</p>
-      <p class="sub">The livestock gestation &amp; breeding calculator built for the barn — for cattle, horses, goats, sheep, pigs, rabbits, alpacas &amp; llamas.</p>
-      <div class="chips">
-        <span class="chip">🚫 No ads, ever</span>
-        <span class="chip">📶 Works offline</span>
-        <span class="chip">🔒 No tracking</span>
-        <span class="chip">🐄 8 species</span>
+  <!-- ============================================================ ENGLISH ==
+       site.js stamps role="tabpanel", id, and aria-hidden here. id="portugues"
+       / id="espanol" below are the app's deep-link anchors; id="top" stays on
+       the English <h1> alone. -->
+  <section data-lang="en" lang="en" aria-label="English">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <img src="app-icon.png" alt="BredDay app icon — a cow" class="hero-icon">
+        <h1 id="top">BredDay</h1>
+        <p class="lede">Breeding date in, due date out.</p>
+        <p class="sub">The livestock gestation &amp; breeding calculator built for the barn — for cattle, horses, goats, sheep, pigs, rabbits, alpacas &amp; llamas.</p>
+        <div class="chips">
+          <span class="chip">🚫 No ads, ever</span>
+          <span class="chip">📶 Works offline</span>
+          <span class="chip">🔒 No tracking</span>
+          <span class="chip">🐄 8 species</span>
+        </div>
+        <p class="platform">Free 2-week trial</p>
       </div>
-      <p class="platform">Free 2-week trial</p>
-    </div>
-  </section>
+    </section>
 
-  <!-- FEATURES -->
-  <section id="features">
-    <div class="wrap">
-      <span class="eyebrow">What BredDay does</span>
-      <h2 class="sec-title">Everything you need from breeding to birth</h2>
-      <p class="sec-intro">One tidy app for the whole cycle — figure the due date, keep the herd, and never miss a checkpoint, all without a signal.</p>
+    <!-- FEATURES -->
+    <section class="blk">
+      <div class="wrap">
+        <span class="eyebrow">What BredDay does</span>
+        <h2 class="sec-title">Everything you need from breeding to birth</h2>
+        <p class="sec-intro">One tidy app for the whole cycle — figure the due date, keep the herd, and never miss a checkpoint, all without a signal.</p>
 
-      <div class="grid">
-        <article class="feature">
-          <div class="badge">📅</div>
-          <h3>Due dates you can trust</h3>
-          <p>Enter the breeding date and get the estimated due date instantly — with breed-specific gestation lengths and a per-animal override when you know your stock better than any table.</p>
-        </article>
+        <div class="grid">
+          <article class="feature">
+            <div class="badge">📅</div>
+            <h3>Due dates you can trust</h3>
+            <p>Enter the breeding date and get the estimated due date instantly — with breed-specific gestation lengths and a per-animal override when you know your stock better than any table.</p>
+          </article>
 
-        <article class="feature">
-          <div class="badge">🐮</div>
-          <h3>Your whole herd, in order</h3>
-          <p>Log every animal, track breeding history and outcomes (live &amp; lost), and see who's closest to due at a glance — sorted and color-coded by how soon.</p>
-        </article>
+          <article class="feature">
+            <div class="badge">🐮</div>
+            <h3>Your whole herd, in order</h3>
+            <p>Log every animal, track breeding history and outcomes (live &amp; lost), and see who's closest to due at a glance — sorted and color-coded by how soon.</p>
+          </article>
 
-        <article class="feature">
-          <span class="tag">New</span>
-          <div class="badge">✅</div>
-          <h3>Checkpoints &amp; reminders</h3>
-          <p>Vet-informed checkpoint templates for every species — <strong>plus your own custom checkpoints</strong> to match how your farm actually runs, each with an optional local reminder.</p>
-        </article>
+          <article class="feature">
+            <span class="tag">New</span>
+            <div class="badge">✅</div>
+            <h3>Checkpoints &amp; reminders</h3>
+            <p>Vet-informed checkpoint templates for every species — <strong>plus your own custom checkpoints</strong> to match how your farm actually runs, each with an optional local reminder.</p>
+          </article>
 
-        <article class="feature">
-          <div class="badge">🗓️</div>
-          <h3>Calendar view</h3>
-          <p>Every due date and checkpoint laid out on a month calendar, so nothing sneaks up on you mid-season.</p>
-        </article>
+          <article class="feature">
+            <div class="badge">🗓️</div>
+            <h3>Calendar view</h3>
+            <p>Every due date and checkpoint laid out on a month calendar, so nothing sneaks up on you mid-season.</p>
+          </article>
 
-        <article class="feature">
-          <div class="badge">📲</div>
-          <h3>Home-screen widget</h3>
-          <p>A countdown right on your home screen — “Bessie · 14d” — and the next three coming up. Glance, don't dig.</p>
-        </article>
+          <article class="feature">
+            <div class="badge">📲</div>
+            <h3>Home-screen widget</h3>
+            <p>A countdown right on your home screen — “Bessie · 14d” — and the next three coming up. Glance, don't dig.</p>
+          </article>
 
-        <article class="feature">
-          <div class="badge">⚡</div>
-          <h3>Quick Calc</h3>
-          <p>Need a fast answer at the chute? Pick a species and a date — due date on the spot, nothing to save.</p>
-        </article>
+          <article class="feature">
+            <div class="badge">⚡</div>
+            <h3>Quick Calc</h3>
+            <p>Need a fast answer at the chute? Pick a species and a date — due date on the spot, nothing to save.</p>
+          </article>
 
-        <article class="feature wide">
-          <div class="badge">🔒</div>
-          <h3>Private by design — and it works in the barn</h3>
-          <p>100% offline: no signal, no problem, and no account to create. No ads, no analytics, no tracking — your herd data never leaves your phone (the App Store label reads <em>Data Not Collected</em>). Export the whole herd to CSV any time it needs to go elsewhere.</p>
-        </article>
+          <article class="feature wide">
+            <div class="badge">🔒</div>
+            <h3>Private by design — and it works in the barn</h3>
+            <p>100% offline: no signal, no problem, and no account to create. No ads, no analytics, no tracking — your herd data never leaves your phone (the App Store label reads <em>Data Not Collected</em>). Export the whole herd to CSV any time it needs to go elsewhere.</p>
+          </article>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- GESTATION ALMANAC -->
-  <section id="gestation" class="almanac">
-    <div class="wrap">
-      <span class="eyebrow">Gestation at a glance</span>
-      <h2 class="sec-title">Eight species, hard-coded and offline</h2>
-      <div class="species">
-        <div class="beast"><span class="em">🐄</span><div class="nm">Cattle</div><div class="dy">283</div><div class="un">days</div></div>
-        <div class="beast"><span class="em">🐴</span><div class="nm">Horse</div><div class="dy">340</div><div class="un">days</div></div>
-        <div class="beast"><span class="em">🐐</span><div class="nm">Goat</div><div class="dy">150</div><div class="un">days</div></div>
-        <div class="beast"><span class="em">🐑</span><div class="nm">Sheep</div><div class="dy">147</div><div class="un">days</div></div>
-        <div class="beast"><span class="em">🐷</span><div class="nm">Pig</div><div class="dy">114</div><div class="un">days</div></div>
-        <div class="beast"><span class="em">🐰</span><div class="nm">Rabbit</div><div class="dy">31</div><div class="un">days</div></div>
-        <div class="beast"><span class="em">🦙</span><div class="nm">Alpaca</div><div class="dy">345</div><div class="un">days</div></div>
-        <div class="beast"><span class="em">🦙</span><div class="nm">Llama</div><div class="dy">350</div><div class="un">days</div></div>
+    <!-- GESTATION ALMANAC -->
+    <section class="blk almanac">
+      <div class="wrap">
+        <span class="eyebrow">Gestation at a glance</span>
+        <h2 class="sec-title">Eight species, hard-coded and offline</h2>
+        <div class="species">
+          <div class="beast"><span class="em">🐄</span><div class="nm">Cattle</div><div class="dy">283</div><div class="un">days</div></div>
+          <div class="beast"><span class="em">🐴</span><div class="nm">Horse</div><div class="dy">340</div><div class="un">days</div></div>
+          <div class="beast"><span class="em">🐐</span><div class="nm">Goat</div><div class="dy">150</div><div class="un">days</div></div>
+          <div class="beast"><span class="em">🐑</span><div class="nm">Sheep</div><div class="dy">147</div><div class="un">days</div></div>
+          <div class="beast"><span class="em">🐷</span><div class="nm">Pig</div><div class="dy">114</div><div class="un">days</div></div>
+          <div class="beast"><span class="em">🐰</span><div class="nm">Rabbit</div><div class="dy">31</div><div class="un">days</div></div>
+          <div class="beast"><span class="em">🦙</span><div class="nm">Alpaca</div><div class="dy">345</div><div class="un">days</div></div>
+          <div class="beast"><span class="em">🦙</span><div class="nm">Llama</div><div class="dy">350</div><div class="un">days</div></div>
+        </div>
+        <p class="note">Averages drawn from published university-extension gestation tables, with breed adjustments built in. Every herd is different — override the length on any animal. Checkpoint templates describe common practice, not veterinary advice; confirm timing with your vet.</p>
       </div>
-      <p class="note">Averages drawn from published university-extension gestation tables, with breed adjustments built in. Every herd is different — override the length on any animal. Checkpoint templates describe common practice, not veterinary advice; confirm timing with your vet.</p>
-    </div>
+    </section>
+
+    <!-- IDENTITY BAND -->
+    <section class="blk band">
+      <div class="wrap">
+        <p class="q">No ads. No accounts. <em>Works with no signal in the barn.</em></p>
+        <small>That's the whole promise.</small>
+      </div>
+    </section>
+
+    <!-- SUPPORT -->
+    <section class="blk support">
+      <div class="wrap">
+        <span class="eyebrow" style="justify-content:center">Need a hand?</span>
+        <h2 class="sec-title">We're here to help</h2>
+        <p class="sec-intro">Questions, feedback, a species or breed you'd like added, or a bug to report — send a note and a real person will read it.</p>
+        <a class="cta" href="mailto:braniapps@gmail.com">✉️ Email support</a>
+        <p class="respond">braniapps@gmail.com · we aim to reply within a couple of days</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot-top">
+          <div class="foot-brand">
+            <img src="app-icon.png" alt="BredDay icon">
+            <div>
+              <b>BredDay</b>
+              <span>Livestock gestation &amp; breeding calculator</span>
+            </div>
+          </div>
+          <nav class="foot-links">
+            <a href="index.html">Support</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Use</a>
+            <a href="mailto:braniapps@gmail.com">Contact</a>
+          </nav>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 BredDay. Made for ranchers &amp; smallholders.</span>
+          <span class="privacy-badge">🔒 Data Not Collected</span>
+        </div>
+      </div>
+    </footer>
+
   </section>
 
-  <!-- IDENTITY BAND -->
-  <section class="band">
-    <div class="wrap">
-      <p class="q">No ads. No accounts. <em>Works with no signal in the barn.</em></p>
-      <small>That's the whole promise.</small>
-    </div>
+  <!-- ======================================================== PORTUGUÊS ==
+       Clone estrutural do bloco em inglês — só o texto e
+       data-lang / id / lang / aria-label mudam. -->
+  <section data-lang="pt" id="portugues" lang="pt-BR" aria-label="Português">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <img src="app-icon.png" alt="Ícone do BredDay — uma vaca" class="hero-icon">
+        <h1>BredDay</h1>
+        <p class="lede">Data da cobertura entra, previsão de parto sai.</p>
+        <p class="sub">A calculadora de gestação e manejo reprodutivo feita para o campo — bovinos, equinos, caprinos, ovinos, suínos, coelhos, alpacas e lhamas.</p>
+        <div class="chips">
+          <span class="chip">🚫 Sem anúncios, nunca</span>
+          <span class="chip">📶 Funciona offline</span>
+          <span class="chip">🔒 Sem rastreamento</span>
+          <span class="chip">🐄 8 espécies</span>
+        </div>
+        <p class="platform">Teste grátis de 2 semanas</p>
+      </div>
+    </section>
+
+    <!-- RECURSOS -->
+    <section class="blk">
+      <div class="wrap">
+        <span class="eyebrow">O que o BredDay faz</span>
+        <h2 class="sec-title">Tudo o que você precisa, da cobertura ao parto</h2>
+        <p class="sec-intro">Um único app organizado para o ciclo inteiro — calcule a previsão de parto, mantenha o rebanho em dia e não perca nenhuma etapa de manejo, tudo sem sinal.</p>
+
+        <div class="grid">
+          <article class="feature">
+            <div class="badge">📅</div>
+            <h3>Previsões de parto confiáveis</h3>
+            <p>Informe a data da cobertura e veja na hora a previsão de parto — com durações de gestação por raça e valor próprio por animal, para quando você conhece o seu plantel melhor do que qualquer tabela.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">🐮</div>
+            <h3>Seu rebanho inteiro, em ordem</h3>
+            <p>Cadastre cada animal, acompanhe o histórico de coberturas e os resultados (nascidos vivos e perdas) e veja num relance quem está mais perto de parir — em ordem e com cores por proximidade.</p>
+          </article>
+
+          <article class="feature">
+            <span class="tag">Novo</span>
+            <div class="badge">✅</div>
+            <h3>Etapas de manejo e lembretes</h3>
+            <p>Modelos de etapas de manejo baseados em prática veterinária para cada espécie — <strong>e mais as etapas que você mesmo criar</strong>, do jeito que a sua fazenda funciona, cada uma com lembrete local opcional.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">🗓️</div>
+            <h3>Visão de calendário</h3>
+            <p>Todos os partos previstos e as etapas de manejo num calendário mensal, para nada pegar você de surpresa no meio da estação.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">📲</div>
+            <h3>Widget na tela de início</h3>
+            <p>A contagem regressiva direto na tela de início — “Mimosa · 14d” — e as três próximas na fila. Um relance basta.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">⚡</div>
+            <h3>Cálculo rápido</h3>
+            <p>Precisa de resposta rápida no tronco de contenção? Escolha a espécie e a data — previsão de parto na hora, nada para salvar.</p>
+          </article>
+
+          <article class="feature wide">
+            <div class="badge">🔒</div>
+            <h3>Privado por natureza — e funciona no curral</h3>
+            <p>100% offline: sem sinal, sem problema — e sem conta para criar. Sem anúncios, sem análises, sem rastreamento: os dados do seu rebanho nunca saem do seu celular (o selo na App Store diz <em>Dados não coletados</em>). Exporte o rebanho inteiro em CSV sempre que ele precisar ir para outro lugar.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALMANAQUE DE GESTAÇÃO -->
+    <section class="blk almanac">
+      <div class="wrap">
+        <span class="eyebrow">Gestação num relance</span>
+        <h2 class="sec-title">Oito espécies, com dados embarcados e offline</h2>
+        <div class="species">
+          <div class="beast"><span class="em">🐄</span><div class="nm">Bovinos</div><div class="dy">283</div><div class="un">dias</div></div>
+          <div class="beast"><span class="em">🐴</span><div class="nm">Equinos</div><div class="dy">340</div><div class="un">dias</div></div>
+          <div class="beast"><span class="em">🐐</span><div class="nm">Caprinos</div><div class="dy">150</div><div class="un">dias</div></div>
+          <div class="beast"><span class="em">🐑</span><div class="nm">Ovinos</div><div class="dy">147</div><div class="un">dias</div></div>
+          <div class="beast"><span class="em">🐷</span><div class="nm">Suínos</div><div class="dy">114</div><div class="un">dias</div></div>
+          <div class="beast"><span class="em">🐰</span><div class="nm">Coelhos</div><div class="dy">31</div><div class="un">dias</div></div>
+          <div class="beast"><span class="em">🦙</span><div class="nm">Alpacas</div><div class="dy">345</div><div class="un">dias</div></div>
+          <div class="beast"><span class="em">🦙</span><div class="nm">Lhamas</div><div class="dy">350</div><div class="un">dias</div></div>
+        </div>
+        <p class="note">Médias extraídas de tabelas de gestação publicadas por serviços de extensão universitária, com ajustes por raça incluídos. Cada rebanho é diferente — ajuste a duração em qualquer animal. Os modelos de etapas de manejo descrevem a prática comum, não orientação veterinária; confirme os prazos com o seu veterinário.</p>
+      </div>
+    </section>
+
+    <!-- FAIXA DE IDENTIDADE -->
+    <section class="blk band">
+      <div class="wrap">
+        <p class="q">Sem anúncios. Sem contas. <em>Funciona sem sinal no curral.</em></p>
+        <small>Essa é a promessa inteira.</small>
+      </div>
+    </section>
+
+    <!-- SUPORTE -->
+    <section class="blk support">
+      <div class="wrap">
+        <span class="eyebrow" style="justify-content:center">Precisa de uma mão?</span>
+        <h2 class="sec-title">Estamos aqui para ajudar</h2>
+        <p class="sec-intro">Dúvidas, sugestões, uma espécie ou raça que você queira ver no app, ou um problema para relatar — mande uma mensagem e uma pessoa de verdade vai ler.</p>
+        <a class="cta" href="mailto:braniapps@gmail.com">✉️ Escrever para o suporte</a>
+        <p class="respond">braniapps@gmail.com · procuramos responder em poucos dias</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot-top">
+          <div class="foot-brand">
+            <img src="app-icon.png" alt="Ícone do BredDay">
+            <div>
+              <b>BredDay</b>
+              <span>Calculadora de gestação e manejo reprodutivo</span>
+            </div>
+          </div>
+          <nav class="foot-links">
+            <a href="index.html">Suporte</a>
+            <a href="privacy.html">Política de Privacidade</a>
+            <a href="terms.html">Termos de Uso</a>
+            <a href="mailto:braniapps@gmail.com">Contato</a>
+          </nav>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 BredDay. Feito para pecuaristas e pequenos criadores.</span>
+          <span class="privacy-badge">🔒 Dados não coletados</span>
+        </div>
+      </div>
+    </footer>
+
   </section>
 
-  <!-- SUPPORT -->
-  <section id="support" class="support">
-    <div class="wrap">
-      <span class="eyebrow" style="justify-content:center">Need a hand?</span>
-      <h2 class="sec-title">We're here to help</h2>
-      <p class="sec-intro">Questions, feedback, a species or breed you'd like added, or a bug to report — send a note and a real person will read it.</p>
-      <a class="cta" href="mailto:braniapps@gmail.com">✉️ Email support</a>
-      <p class="respond">braniapps@gmail.com · we aim to reply within a couple of days</p>
-    </div>
+  <!-- ========================================================== ESPAÑOL ==
+       Clon estructural del bloque en inglés — solo cambian el texto y
+       data-lang / id / lang / aria-label. -->
+  <section data-lang="es" id="espanol" lang="es" aria-label="Español">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <img src="app-icon.png" alt="Ícono de BredDay — una vaca" class="hero-icon">
+        <h1>BredDay</h1>
+        <p class="lede">Anota la fecha de monta, obtén la fecha de parto.</p>
+        <p class="sub">La calculadora de gestación y reproducción hecha para el corral — bovinos, equinos, caprinos, ovinos, porcinos, conejos, alpacas y llamas.</p>
+        <div class="chips">
+          <span class="chip">🚫 Sin anuncios, nunca</span>
+          <span class="chip">📶 Funciona sin conexión</span>
+          <span class="chip">🔒 Sin rastreo</span>
+          <span class="chip">🐄 8 especies</span>
+        </div>
+        <p class="platform">Prueba gratis de 2 semanas</p>
+      </div>
+    </section>
+
+    <!-- FUNCIONES -->
+    <section class="blk">
+      <div class="wrap">
+        <span class="eyebrow">Qué hace BredDay</span>
+        <h2 class="sec-title">Todo lo que necesitas, de la monta al parto</h2>
+        <p class="sec-intro">Una sola app ordenada para todo el ciclo: calcula la fecha probable de parto, lleva el hato al día y no se te pasa ninguna revisión, todo sin señal.</p>
+
+        <div class="grid">
+          <article class="feature">
+            <div class="badge">📅</div>
+            <h3>Fechas de parto confiables</h3>
+            <p>Anota la fecha de monta y obtén al instante la fecha probable de parto — con duraciones de gestación por raza y un valor propio por animal, para cuando conoces tu ganado mejor que cualquier tabla.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">🐮</div>
+            <h3>Tu hato, ordenado</h3>
+            <p>Registra cada animal, lleva el historial de montas y los resultados (crías vivas y perdidas), y ve de un vistazo cuál está más cerca de parir — en orden y con colores según qué tan pronto.</p>
+          </article>
+
+          <article class="feature">
+            <span class="tag">Nuevo</span>
+            <div class="badge">✅</div>
+            <h3>Revisiones y recordatorios</h3>
+            <p>Plantillas de revisiones basadas en práctica veterinaria para cada especie — <strong>más las revisiones que tú agregues</strong>, como de verdad funciona tu rancho, cada una con recordatorio local opcional.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">🗓️</div>
+            <h3>Vista de calendario</h3>
+            <p>Cada fecha de parto y cada revisión en un calendario mensual, para que nada te tome por sorpresa a mitad de temporada.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">📲</div>
+            <h3>Widget en la pantalla de inicio</h3>
+            <p>La cuenta regresiva en tu pantalla de inicio — “Lucera · 14 d” — y las tres siguientes en camino. Un vistazo basta.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">⚡</div>
+            <h3>Cálculo rápido</h3>
+            <p>¿Necesitas la respuesta al momento, junto a la manga? Elige especie y fecha — la fecha de parto al instante, sin guardar nada.</p>
+          </article>
+
+          <article class="feature wide">
+            <div class="badge">🔒</div>
+            <h3>Privada por diseño — y funciona en el corral</h3>
+            <p>100% sin conexión: sin señal, sin problema — y sin cuenta que crear. Sin anuncios, sin analíticas, sin rastreo: los datos de tu hato nunca salen de tu teléfono (la etiqueta del App Store dice <em>No se recopilan datos</em>). Exporta el hato completo a CSV cuando tus datos tengan que ir a otro lado.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALMANAQUE DE GESTACIÓN -->
+    <section class="blk almanac">
+      <div class="wrap">
+        <span class="eyebrow">Gestación de un vistazo</span>
+        <h2 class="sec-title">Ocho especies, con los datos integrados y sin conexión</h2>
+        <div class="species">
+          <div class="beast"><span class="em">🐄</span><div class="nm">Bovinos</div><div class="dy">283</div><div class="un">días</div></div>
+          <div class="beast"><span class="em">🐴</span><div class="nm">Equinos</div><div class="dy">340</div><div class="un">días</div></div>
+          <div class="beast"><span class="em">🐐</span><div class="nm">Caprinos</div><div class="dy">150</div><div class="un">días</div></div>
+          <div class="beast"><span class="em">🐑</span><div class="nm">Ovinos</div><div class="dy">147</div><div class="un">días</div></div>
+          <div class="beast"><span class="em">🐷</span><div class="nm">Porcinos</div><div class="dy">114</div><div class="un">días</div></div>
+          <div class="beast"><span class="em">🐰</span><div class="nm">Conejos</div><div class="dy">31</div><div class="un">días</div></div>
+          <div class="beast"><span class="em">🦙</span><div class="nm">Alpacas</div><div class="dy">345</div><div class="un">días</div></div>
+          <div class="beast"><span class="em">🦙</span><div class="nm">Llamas</div><div class="dy">350</div><div class="un">días</div></div>
+        </div>
+        <p class="note">Promedios tomados de tablas de gestación publicadas por servicios de extensión universitaria, con ajustes por raza incluidos. Cada hato es distinto — ajusta la duración en cualquier animal. Las plantillas de revisiones describen la práctica común, no asesoría veterinaria; confirma los tiempos con tu veterinario.</p>
+      </div>
+    </section>
+
+    <!-- BANDA DE IDENTIDAD -->
+    <section class="blk band">
+      <div class="wrap">
+        <p class="q">Sin anuncios. Sin cuentas. <em>Funciona sin señal en el corral.</em></p>
+        <small>Esa es toda la promesa.</small>
+      </div>
+    </section>
+
+    <!-- SOPORTE -->
+    <section class="blk support">
+      <div class="wrap">
+        <span class="eyebrow" style="justify-content:center">¿Necesitas una mano?</span>
+        <h2 class="sec-title">Estamos aquí para ayudar</h2>
+        <p class="sec-intro">Dudas, sugerencias, una especie o raza que quieras ver en la app, o un problema que reportar — manda un mensaje y una persona de verdad lo va a leer.</p>
+        <a class="cta" href="mailto:braniapps@gmail.com">✉️ Escribir a soporte</a>
+        <p class="respond">braniapps@gmail.com · procuramos responder en unos días</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot-top">
+          <div class="foot-brand">
+            <img src="app-icon.png" alt="Ícono de BredDay">
+            <div>
+              <b>BredDay</b>
+              <span>Calculadora de gestación y reproducción</span>
+            </div>
+          </div>
+          <nav class="foot-links">
+            <a href="index.html">Soporte</a>
+            <a href="privacy.html">Política de Privacidad</a>
+            <a href="terms.html">Términos de Uso</a>
+            <a href="mailto:braniapps@gmail.com">Contacto</a>
+          </nav>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 BredDay. Hecho para ganaderos y pequeños criadores.</span>
+          <span class="privacy-badge">🔒 No se recopilan datos</span>
+        </div>
+      </div>
+    </footer>
+
   </section>
 
 </main>
-
-<footer>
-  <div class="wrap">
-    <div class="foot-top">
-      <div class="foot-brand">
-        <img src="app-icon.png" alt="BredDay icon">
-        <div>
-          <b>BredDay</b>
-          <span>Livestock gestation &amp; breeding calculator</span>
-        </div>
-      </div>
-      <nav class="foot-links">
-        <a href="https://branicio.github.io/bredday-support/">Support</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="mailto:braniapps@gmail.com">Contact</a>
-      </nav>
-    </div>
-    <div class="foot-bottom">
-      <span>© 2026 BredDay. Made for ranchers &amp; smallholders.</span>
-      <span class="privacy-badge">🔒 Data Not Collected</span>
-    </div>
-  </div>
-</footer>
 
 </body>
 </html>

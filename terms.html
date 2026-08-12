@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terms of Use — BredDay</title>
-<meta name="description" content="BredDay's terms of use — a livestock gestation & breeding record-keeping utility. Not veterinary advice. Subscription details, liability, and governing law.">
+<meta name="description" content="BredDay's terms of use — a livestock gestation & breeding record-keeping utility. Not veterinary advice. Subscription details, liability, and governing law. In English, Portuguese and Spanish.">
 <link rel="icon" href="app-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="site.js" defer></script>
 <style>
   :root{
     --paper:#F4EAD2;--paper-2:#FBF6E8;--card:#FCF9EF;
@@ -29,15 +30,37 @@
   ::selection{background:var(--amber);color:#fff}
   .wrap{max-width:820px;margin:0 auto;padding:0 22px}
 
-  header{position:sticky;top:0;z-index:50;background:rgba(244,234,210,.82);backdrop-filter:saturate(150%) blur(10px);border-bottom:1px solid var(--hair)}
-  .nav{max-width:1060px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;height:64px}
+  header.site{position:sticky;top:0;z-index:50;background:rgba(244,234,210,.82);backdrop-filter:saturate(150%) blur(10px);border-bottom:1px solid var(--hair)}
+  .nav{max-width:1060px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;height:64px}
   .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);font-weight:600}
   .brand img{width:34px;height:34px;border-radius:9px;box-shadow:var(--shadow-sm)}
   .brand b{font-family:var(--serif);font-size:1.32rem;font-weight:600;letter-spacing:-.01em}
-  .nav-links{display:flex;gap:26px;font-size:.93rem;font-weight:500}
+  .nav-links{display:flex;gap:26px;font-size:.93rem;font-weight:500;margin-left:auto}
   .nav-links a{text-decoration:none;color:var(--ink-soft);transition:color .2s}
   .nav-links a:hover,.nav-links a.active{color:var(--green-deep)}
   @media(max-width:640px){.nav-links{display:none}}
+
+  /* ---------- Language switch ----------
+     .langtabs is the role="tablist"; site.js maintains aria-selected,
+     aria-controls and tabindex on the buttons. Hidden without JS: all three
+     languages already render stacked then, so a switch that cannot switch
+     anything would only be a trap. */
+  .langtabs{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(--paper-2);border:1px solid var(--hair);flex:none}
+  .langtabs [role="tab"]{appearance:none;-webkit-appearance:none;border:0;background:transparent;cursor:pointer;padding:7px 12px;border-radius:999px;font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.08em;color:var(--ink-soft);transition:color .2s,background-color .2s}
+  .langtabs [role="tab"]:hover{color:var(--green-deep);background:var(--wheat)}
+  .langtabs [role="tab"][aria-selected="true"]{background:var(--green-deep);color:var(--wheat);font-weight:800}
+  .langtabs [role="tab"]:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  html:not([data-js="on"]) .langtabs{display:none}
+
+  /* Languages are hidden ONLY when site.js has announced itself by setting
+     data-js on <html>. If the script never runs or throws, this selector
+     stops matching and all three languages render stacked — readable,
+     anchor-navigable, and complete. Showing the wrong language is cosmetic;
+     showing none would be a legal-content outage. Never hide [data-lang]
+     outside an html[data-js="on"] scope. */
+  html[data-js="on"] [data-lang]{display:none}
+  html[data-js="on"] [data-lang][data-lang-active]{display:block}
+  html:not([data-js="on"]) [data-lang] + [data-lang]{border-top:2px solid var(--hair)}
 
   .doc-hero{text-align:center;padding:58px 0 6px}
   .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--barn);margin-bottom:14px}
@@ -87,159 +110,465 @@
 </head>
 <body>
 
-<header>
+<!-- Chrome: outside every [data-lang] section; site.js swaps its text via the
+     data-i18n-* attributes. Tab labels stay untranslated (endonym initials). -->
+<header class="site">
   <div class="nav">
     <a class="brand" href="index.html"><img src="app-icon.png" alt="BredDay icon"><b>BredDay</b></a>
-    <nav class="nav-links">
-      <a href="index.html#features">Features</a>
-      <a href="index.html#support">Support</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html" class="active">Terms</a>
+    <nav class="nav-links" aria-label="Main" data-i18n-aria-en="Main" data-i18n-aria-pt="Principal" data-i18n-aria-es="Principal">
+      <a href="index.html" data-i18n-en="Home" data-i18n-pt="Início" data-i18n-es="Inicio">Home</a>
+      <a href="privacy.html" data-i18n-en="Privacy" data-i18n-pt="Privacidade" data-i18n-es="Privacidad">Privacy</a>
+      <a href="terms.html" class="active" aria-current="page" data-i18n-en="Terms" data-i18n-pt="Termos" data-i18n-es="Términos">Terms</a>
     </nav>
+    <div class="langtabs" role="tablist" aria-label="Language" data-i18n-aria-en="Language" data-i18n-aria-pt="Idioma" data-i18n-aria-es="Idioma">
+      <button type="button" role="tab" data-lang-target="en" aria-label="English">EN</button>
+      <button type="button" role="tab" data-lang-target="pt" aria-label="Português">PT</button>
+      <button type="button" role="tab" data-lang-target="es" aria-label="Español">ES</button>
+    </div>
   </div>
 </header>
 
 <main>
-  <div class="wrap">
-    <div class="doc-hero">
-      <span class="eyebrow">Legal</span>
-      <h1>Terms of Use</h1>
-      <p class="app">BredDay — Livestock Gestation &amp; Breeding Calculator</p>
-      <span class="date">Effective Date: July 22, 2026</span>
+
+  <!-- ============================================================ ENGLISH ==
+       site.js stamps role="tabpanel", id, and aria-hidden here. id="portugues"
+       / id="espanol" below are the app's deep-link anchors; id="top" stays on
+       the English <h1> alone. -->
+  <section data-lang="en" lang="en" aria-label="English">
+
+    <div class="wrap">
+      <div class="doc-hero">
+        <span class="eyebrow">Legal</span>
+        <h1 id="top">Terms of Use</h1>
+        <p class="app">BredDay — Livestock Gestation &amp; Breeding Calculator</p>
+        <span class="date">Effective Date: July 22, 2026</span>
+      </div>
+
+      <article class="doc">
+        <p class="intro">Please read these Terms of Use ("Terms") carefully before using the BredDay mobile application ("App"). In these Terms, "we," "us," and "the developer" refer to the developer and publisher of BredDay. By downloading, installing, or using BredDay, you agree to be bound by these Terms.</p>
+
+        <h2>1. Acceptance of Terms</h2>
+        <p>By accessing or using BredDay, you agree to these Terms and our <a href="privacy.html">Privacy Policy</a>. If you do not agree to these Terms, please do not use the App.</p>
+
+        <h2>2. Description of Service</h2>
+        <p>BredDay is a livestock gestation and breeding record-keeping tool that provides:</p>
+        <ul>
+          <li>Estimated due-date calculation from breeding dates for cattle, horses, goats, sheep, pigs, rabbits, alpacas, and llamas</li>
+          <li>Per-animal breeding logs, checkpoints, and outcome records</li>
+          <li>A quick gestation calculator (Quick Calc)</li>
+          <li>Calendar view of due dates and checkpoints</li>
+          <li>Optional local checkpoint reminders</li>
+          <li>A home-screen widget with upcoming due dates</li>
+          <li>CSV export of your herd log</li>
+        </ul>
+
+        <div class="callout">
+          <h3>Not Veterinary Advice</h3>
+          <p><strong>BredDay is a record-keeping and calculation utility, not a veterinary service. It does not provide veterinary or medical advice.</strong></p>
+          <p>Gestation lengths and heat-cycle figures are common reference values drawn from published university extension tables, and checkpoint templates reflect common husbandry practice. Actual gestation varies by animal, breed, health, and conditions. Always confirm management decisions, vaccination schedules, and birthing plans with your veterinarian. We are not responsible for animal health outcomes, missed breeding windows, or losses of any kind resulting from reliance on the App's calculated dates or reminders. Reminder delivery depends on your device's settings and operating system and is not guaranteed.</p>
+          <p><strong>Assumption of risk:</strong> Livestock breeding involves inherent biological variability. Gestation lengths, heat cycles, and checkpoint timings are averages that individual animals will deviate from. The App presents all calculated dates as estimates, and you affirmatively acknowledge this disclaimer in the App before subscribing. By using the App, you acknowledge this variability and agree that you assume all risk arising from husbandry, breeding, and management decisions made in connection with the App.</p>
+          <p><strong>Professional use:</strong> The App is a general-purpose calculation and record-keeping utility. It is not certified, validated, or intended for clinical veterinary use. Veterinarians and other animal-care professionals remain solely responsible for their own decisions and standard of care, and must not rely on the App as a substitute for professional judgment.</p>
+        </div>
+
+        <h2>3. BredDay Pro Subscription</h2>
+        <div class="panel">
+          <h3>Subscription Details</h3>
+          <p><strong>Product:</strong> BredDay Pro</p>
+
+          <h3>Pricing Options</h3>
+          <ul>
+            <li><strong>Monthly:</strong> $2.99 USD per month, or the equivalent in your local currency (auto-renewable), with a 2-week free trial</li>
+            <li><strong>Yearly:</strong> $9.99 USD per year, or the equivalent in your local currency (auto-renewable), with a 2-week free trial</li>
+          </ul>
+          <p>Prices are set per storefront and may vary by country and currency; the price shown in your app store at the time of purchase applies.</p>
+
+          <h3>Subscription Requirement</h3>
+          <p>BredDay requires an active BredDay Pro subscription to use the app. Your subscription includes full access to all features:</p>
+          <ul>
+            <li>Due-date calculation and Quick Calc for all eight species</li>
+            <li>Unlimited animals with breeding history, checkpoints, and reminders</li>
+            <li>Calendar view, home-screen widget, and CSV herd export</li>
+          </ul>
+
+          <h3>Free Trial</h3>
+          <p>Both plans include a 2-week free introductory trial for new subscribers, so you can use the full app for two weeks before any charge. If you do not cancel before the trial ends, the subscription begins and your app store account (such as your Apple ID or Google account) is charged.</p>
+
+          <h3>Auto-Renewal</h3>
+          <p>Your subscription (monthly or yearly) will automatically renew unless auto-renewal is turned off at least 24 hours before the end of the current subscription period. Your account will be charged for renewal within 24 hours prior to the end of the current period.</p>
+
+          <h3>Managing Your Subscription</h3>
+          <p>You can manage or cancel your subscription at any time through your app store account settings — on iOS via Settings &gt; [Your Name] &gt; Subscriptions, or on Android via the Google Play Store &gt; Subscriptions.</p>
+
+          <h3>Refunds</h3>
+          <p>All purchases are processed by the app store you downloaded BredDay from (such as the Apple App Store or Google Play). Refund requests must be made through that store according to its refund policies.</p>
+        </div>
+
+        <h2>4. User Responsibilities</h2>
+        <p>You agree to:</p>
+        <ul>
+          <li>Use the App only for lawful purposes</li>
+          <li>Verify calculated dates and checkpoint guidance against your own records and professional advice</li>
+          <li>Not attempt to reverse engineer, decompile, or disassemble the App</li>
+          <li>Not use the App in any way that could damage, disable, or impair the service</li>
+        </ul>
+
+        <h2>5. Your Data</h2>
+        <p>All herd records you create in BredDay are stored locally on your device and belong to you. We recommend exporting your herd log periodically (CSV export) as a backup — deleting the App deletes its local data.</p>
+
+        <h2>6. Intellectual Property</h2>
+        <p>All content, features, and functionality of BredDay, including but not limited to text, graphics, logos, icons, images, and software, are the exclusive property of the developer and are protected by international copyright, trademark, and other intellectual property laws.</p>
+
+        <h2>7. Limitation of Liability</h2>
+        <p>To the maximum extent permitted by applicable law:</p>
+        <ul>
+          <li>BredDay is provided "as is" without warranties of any kind</li>
+          <li>We do not guarantee the accuracy of calculated due dates or the delivery of reminders</li>
+          <li>We are not liable for any indirect, incidental, special, consequential, or punitive damages, or for any loss of profits, revenue, livestock, or data — including animal loss, missed breeding or management windows, veterinary costs, or other economic loss — resulting from your use of or inability to use the App, even if we have been advised of the possibility of such damages</li>
+          <li>Our total liability shall not exceed the amount you paid for the App or subscription in the past 12 months</li>
+          <li>Some jurisdictions do not allow the exclusion or limitation of certain warranties or damages; in those jurisdictions, our liability is limited to the maximum extent permitted by law</li>
+        </ul>
+
+        <h2>8. Indemnification</h2>
+        <p>You agree to indemnify and hold harmless the developer of BredDay from any claims, damages, losses, or expenses arising from your use of the App or violation of these Terms.</p>
+
+        <h2>9. Changes to Terms</h2>
+        <p>We reserve the right to modify these Terms at any time. Changes will be posted on this page with an updated effective date. Your continued use of the App after changes constitutes acceptance of the modified Terms.</p>
+
+        <h2>10. Governing Law</h2>
+        <p>These Terms shall be governed by and construed in accordance with the laws of the State of California, United States, without regard to its conflict of law principles. Any dispute arising out of or relating to these Terms or the App shall be brought exclusively in the state or federal courts located in California, and you consent to the personal jurisdiction of such courts.</p>
+
+        <h2>11. App Stores</h2>
+        <p>The App is distributed through app stores — including the Apple App Store and Google Play — and is licensed, not sold, to you. Your use of the App is also subject to the terms of whichever store you downloaded it from.</p>
+        <p><strong>Apple App Store.</strong> Apple's standard <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener noreferrer">Licensed Application End User License Agreement</a> also applies to your use of the App. Apple is not a party to these Terms, has no obligation to provide maintenance or support for the App, and is not responsible for the App or its content. Apple and its subsidiaries are third-party beneficiaries of these Terms and may enforce them against you.</p>
+        <p><strong>Google Play.</strong> Your use of the App is also subject to the <a href="https://play.google.com/about/play-terms/" target="_blank" rel="noopener noreferrer">Google Play Terms of Service</a>. Google is not a party to these Terms and is not responsible for the App or its content.</p>
+
+        <h2>12. Severability</h2>
+        <p>If any provision of these Terms is found to be unenforceable, the remaining provisions will continue to be valid and enforceable.</p>
+
+        <div class="contact">
+          <h2>Contact Us</h2>
+          <p>If you have any questions about these Terms of Use, please contact us at:</p>
+          <a class="mail" href="mailto:braniapps@gmail.com">braniapps@gmail.com</a>
+        </div>
+
+        <a class="doc-back" href="index.html">← Back to Support</a>
+      </article>
     </div>
 
-    <article class="doc">
-      <p class="intro">Please read these Terms of Use ("Terms") carefully before using the BredDay mobile application ("App"). In these Terms, "we," "us," and "the developer" refer to the developer and publisher of BredDay. By downloading, installing, or using BredDay, you agree to be bound by these Terms.</p>
+    <footer>
+      <div class="wrap" style="max-width:1060px">
+        <div class="foot-top">
+          <div class="foot-brand">
+            <img src="app-icon.png" alt="BredDay icon">
+            <div><b>BredDay</b><span>Livestock gestation &amp; breeding calculator</span></div>
+          </div>
+          <nav class="foot-links">
+            <a href="index.html">Support</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Use</a>
+            <a href="mailto:braniapps@gmail.com">Contact</a>
+          </nav>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 BredDay. All rights reserved.</span>
+          <span class="privacy-badge">🔒 Data Not Collected</span>
+        </div>
+      </div>
+    </footer>
 
-      <h2>1. Acceptance of Terms</h2>
-      <p>By accessing or using BredDay, you agree to these Terms and our <a href="privacy.html">Privacy Policy</a>. If you do not agree to these Terms, please do not use the App.</p>
+  </section>
 
-      <h2>2. Description of Service</h2>
-      <p>BredDay is a livestock gestation and breeding record-keeping tool that provides:</p>
-      <ul>
-        <li>Estimated due-date calculation from breeding dates for cattle, horses, goats, sheep, pigs, rabbits, alpacas, and llamas</li>
-        <li>Per-animal breeding logs, checkpoints, and outcome records</li>
-        <li>A quick gestation calculator (Quick Calc)</li>
-        <li>Calendar view of due dates and checkpoints</li>
-        <li>Optional local checkpoint reminders</li>
-        <li>A home-screen widget with upcoming due dates</li>
-        <li>CSV export of your herd log</li>
-      </ul>
+  <!-- ======================================================== PORTUGUÊS == -->
+  <section data-lang="pt" id="portugues" lang="pt-BR" aria-label="Português">
 
-      <div class="callout">
-        <h3>Not Veterinary Advice</h3>
-        <p><strong>BredDay is a record-keeping and calculation utility, not a veterinary service. It does not provide veterinary or medical advice.</strong></p>
-        <p>Gestation lengths and heat-cycle figures are common reference values drawn from published university extension tables, and checkpoint templates reflect common husbandry practice. Actual gestation varies by animal, breed, health, and conditions. Always confirm management decisions, vaccination schedules, and birthing plans with your veterinarian. We are not responsible for animal health outcomes, missed breeding windows, or losses of any kind resulting from reliance on the App's calculated dates or reminders. Reminder delivery depends on your device's settings and operating system and is not guaranteed.</p>
-        <p><strong>Assumption of risk:</strong> Livestock breeding involves inherent biological variability. Gestation lengths, heat cycles, and checkpoint timings are averages that individual animals will deviate from. The App presents all calculated dates as estimates, and you affirmatively acknowledge this disclaimer in the App before subscribing. By using the App, you acknowledge this variability and agree that you assume all risk arising from husbandry, breeding, and management decisions made in connection with the App.</p>
-        <p><strong>Professional use:</strong> The App is a general-purpose calculation and record-keeping utility. It is not certified, validated, or intended for clinical veterinary use. Veterinarians and other animal-care professionals remain solely responsible for their own decisions and standard of care, and must not rely on the App as a substitute for professional judgment.</p>
+    <div class="wrap">
+      <div class="doc-hero">
+        <span class="eyebrow">Legal</span>
+        <h1>Termos de Uso</h1>
+        <p class="app">BredDay — Calculadora de Gestação e Manejo Reprodutivo</p>
+        <span class="date">Data de vigência: 22 de julho de 2026</span>
       </div>
 
-      <h2>3. BredDay Pro Subscription</h2>
-      <div class="panel">
-        <h3>Subscription Details</h3>
-        <p><strong>Product:</strong> BredDay Pro</p>
+      <article class="doc">
+        <p class="intro">Leia estes Termos de Uso ("Termos") com atenção antes de usar o aplicativo BredDay ("Aplicativo"). Nestes Termos, "nós" e "o desenvolvedor" referem-se ao desenvolvedor e publicador do BredDay. Ao baixar, instalar ou usar o BredDay, você concorda em ficar vinculado a estes Termos.</p>
 
-        <h3>Pricing Options</h3>
+        <h2>1. Aceitação dos Termos</h2>
+        <p>Ao acessar ou usar o BredDay, você concorda com estes Termos e com a nossa <a href="privacy.html">Política de Privacidade</a>. Se você não concordar com estes Termos, não use o Aplicativo.</p>
+
+        <h2>2. Descrição do serviço</h2>
+        <p>O BredDay é uma ferramenta de cálculo de gestação e registro reprodutivo do rebanho que oferece:</p>
         <ul>
-          <li><strong>Monthly:</strong> $2.99 USD per month, or the equivalent in your local currency (auto-renewable), with a 2-week free trial</li>
-          <li><strong>Yearly:</strong> $9.99 USD per year, or the equivalent in your local currency (auto-renewable), with a 2-week free trial</li>
+          <li>Cálculo da previsão de parto a partir da data da cobertura para bovinos, equinos, caprinos, ovinos, suínos, coelhos, alpacas e lhamas</li>
+          <li>Registros de cobertura por animal, etapas de manejo e resultados das parições</li>
+          <li>Uma calculadora rápida de gestação (Cálculo rápido)</li>
+          <li>Visão de calendário com os partos previstos e as etapas de manejo</li>
+          <li>Lembretes locais opcionais para as etapas de manejo</li>
+          <li>Um widget de tela de início com os próximos partos</li>
+          <li>Exportação do registro do rebanho em CSV</li>
         </ul>
-        <p>Prices are set per storefront and may vary by country and currency; the price shown in your app store at the time of purchase applies.</p>
 
-        <h3>Subscription Requirement</h3>
-        <p>BredDay requires an active BredDay Pro subscription to use the app. Your subscription includes full access to all features:</p>
+        <div class="callout">
+          <h3>Não é orientação veterinária</h3>
+          <p><strong>O BredDay é um utilitário de cálculo e registro, não um serviço veterinário. Ele não fornece orientação veterinária nem médica.</strong></p>
+          <p>As durações de gestação e os números de ciclo de cio são valores de referência de prática comum, extraídos de tabelas publicadas por serviços de extensão universitária, e os modelos de etapas de manejo refletem a prática usual de criação. A gestação real varia por animal, raça, saúde e condições. Confirme sempre as decisões de manejo, os calendários de vacinação e os planos de parto com o seu médico veterinário. Não nos responsabilizamos por desfechos de saúde animal, janelas de cobertura perdidas ou perdas de qualquer tipo decorrentes da confiança nas datas calculadas ou nos lembretes do Aplicativo. A entrega dos lembretes depende dos ajustes do seu dispositivo e do sistema operacional e não é garantida.</p>
+          <p><strong>Assunção de risco:</strong> a reprodução de animais envolve variabilidade biológica inerente. Durações de gestação, ciclos de cio e prazos das etapas de manejo são médias das quais cada animal pode se desviar. O Aplicativo apresenta todas as datas calculadas como estimativas, e você confirma expressamente esse aviso dentro do Aplicativo antes de assinar. Ao usar o Aplicativo, você reconhece essa variabilidade e concorda em assumir todo o risco decorrente das decisões de criação, reprodução e manejo tomadas com o apoio do Aplicativo.</p>
+          <p><strong>Uso profissional:</strong> o Aplicativo é um utilitário de cálculo e registro de uso geral. Ele não é certificado, validado nem destinado ao uso veterinário clínico. Médicos veterinários e outros profissionais de cuidado animal permanecem os únicos responsáveis por suas decisões e pelo seu padrão de atendimento, e não devem usar o Aplicativo como substituto do julgamento profissional.</p>
+        </div>
+
+        <h2>3. Assinatura BredDay Pro</h2>
+        <div class="panel">
+          <h3>Detalhes da assinatura</h3>
+          <p><strong>Produto:</strong> BredDay Pro</p>
+
+          <h3>Opções de preço</h3>
+          <ul>
+            <li><strong>Mensal:</strong> US$ 2,99 por mês, ou o equivalente na sua moeda local (renovação automática), com 2 semanas de teste grátis</li>
+            <li><strong>Anual:</strong> US$ 9,99 por ano, ou o equivalente na sua moeda local (renovação automática), com 2 semanas de teste grátis</li>
+          </ul>
+          <p>Os preços são definidos por loja e podem variar por país e moeda; vale o preço exibido na sua loja de aplicativos no momento da compra.</p>
+
+          <h3>Assinatura obrigatória</h3>
+          <p>O BredDay exige uma assinatura BredDay Pro ativa para usar o aplicativo. Sua assinatura inclui acesso completo a todos os recursos:</p>
+          <ul>
+            <li>Cálculo da previsão de parto e Cálculo rápido para as oito espécies</li>
+            <li>Animais ilimitados, com histórico de coberturas, etapas de manejo e lembretes</li>
+            <li>Visão de calendário, widget de tela de início e exportação do rebanho em CSV</li>
+          </ul>
+
+          <h3>Teste grátis</h3>
+          <p>Os dois planos incluem 2 semanas de teste grátis introdutório para novos assinantes, para você usar o aplicativo completo por duas semanas antes de qualquer cobrança. Se você não cancelar antes do fim do teste, a assinatura começa e a cobrança é feita na sua conta da loja de aplicativos (como o seu ID Apple ou a sua conta do Google).</p>
+
+          <h3>Renovação automática</h3>
+          <p>Sua assinatura (mensal ou anual) será renovada automaticamente, a menos que a renovação automática seja desativada pelo menos 24 horas antes do fim do período atual. A cobrança da renovação é feita na sua conta nas 24 horas anteriores ao fim do período atual.</p>
+
+          <h3>Como gerenciar sua assinatura</h3>
+          <p>Você pode gerenciar ou cancelar sua assinatura a qualquer momento nas configurações da sua conta na loja de aplicativos — no iOS em Ajustes &gt; [Seu nome] &gt; Assinaturas, ou no Android na Google Play Store &gt; Assinaturas.</p>
+
+          <h3>Reembolsos</h3>
+          <p>Todas as compras são processadas pela loja de aplicativos de onde você baixou o BredDay (como a App Store da Apple ou o Google Play). Pedidos de reembolso devem ser feitos por meio dessa loja, conforme as políticas de reembolso dela.</p>
+        </div>
+
+        <h2>4. Responsabilidades do usuário</h2>
+        <p>Você concorda em:</p>
         <ul>
-          <li>Due-date calculation and Quick Calc for all eight species</li>
-          <li>Unlimited animals with breeding history, checkpoints, and reminders</li>
-          <li>Calendar view, home-screen widget, and CSV herd export</li>
+          <li>Usar o Aplicativo apenas para fins lícitos</li>
+          <li>Conferir as datas calculadas e as orientações das etapas de manejo com os seus próprios registros e com orientação profissional</li>
+          <li>Não tentar fazer engenharia reversa, descompilar ou desmontar o Aplicativo</li>
+          <li>Não usar o Aplicativo de forma que possa danificar, desativar ou prejudicar o serviço</li>
         </ul>
 
-        <h3>Free Trial</h3>
-        <p>Both plans include a 2-week free introductory trial for new subscribers, so you can use the full app for two weeks before any charge. If you do not cancel before the trial ends, the subscription begins and your app store account (such as your Apple ID or Google account) is charged.</p>
+        <h2>5. Seus dados</h2>
+        <p>Todos os registros do rebanho que você cria no BredDay ficam armazenados localmente no seu dispositivo e pertencem a você. Recomendamos exportar o registro do rebanho periodicamente (exportação em CSV) como cópia de segurança — excluir o Aplicativo apaga os dados locais dele.</p>
 
-        <h3>Auto-Renewal</h3>
-        <p>Your subscription (monthly or yearly) will automatically renew unless auto-renewal is turned off at least 24 hours before the end of the current subscription period. Your account will be charged for renewal within 24 hours prior to the end of the current period.</p>
+        <h2>6. Propriedade intelectual</h2>
+        <p>Todo o conteúdo, os recursos e as funcionalidades do BredDay — incluindo, entre outros, textos, gráficos, logotipos, ícones, imagens e software — são propriedade exclusiva do desenvolvedor e estão protegidos por leis internacionais de direitos autorais, marcas e demais leis de propriedade intelectual.</p>
 
-        <h3>Managing Your Subscription</h3>
-        <p>You can manage or cancel your subscription at any time through your app store account settings — on iOS via Settings &gt; [Your Name] &gt; Subscriptions, or on Android via the Google Play Store &gt; Subscriptions.</p>
+        <h2>7. Limitação de responsabilidade</h2>
+        <p>Na máxima medida permitida pela lei aplicável:</p>
+        <ul>
+          <li>O BredDay é fornecido "no estado em que se encontra", sem garantias de qualquer tipo</li>
+          <li>Não garantimos a exatidão das previsões de parto calculadas nem a entrega dos lembretes</li>
+          <li>Não nos responsabilizamos por danos indiretos, incidentais, especiais, consequentes ou punitivos, nem por perda de lucros, receita, animais ou dados — incluindo perda de animais, janelas de cobertura ou de manejo perdidas, custos veterinários ou outros prejuízos econômicos — decorrentes do uso ou da impossibilidade de uso do Aplicativo, mesmo que tenhamos sido avisados da possibilidade de tais danos</li>
+          <li>Nossa responsabilidade total não excederá o valor que você pagou pelo Aplicativo ou pela assinatura nos últimos 12 meses</li>
+          <li>Algumas jurisdições não permitem a exclusão ou a limitação de certas garantias ou danos; nessas jurisdições, nossa responsabilidade fica limitada à máxima medida permitida por lei</li>
+        </ul>
 
-        <h3>Refunds</h3>
-        <p>All purchases are processed by the app store you downloaded BredDay from (such as the Apple App Store or Google Play). Refund requests must be made through that store according to its refund policies.</p>
+        <h2>8. Indenização</h2>
+        <p>Você concorda em indenizar e isentar o desenvolvedor do BredDay de quaisquer reivindicações, danos, perdas ou despesas decorrentes do seu uso do Aplicativo ou da violação destes Termos.</p>
+
+        <h2>9. Alterações nos Termos</h2>
+        <p>Reservamo-nos o direito de modificar estes Termos a qualquer momento. As alterações serão publicadas nesta página com uma nova data de vigência. Continuar usando o Aplicativo após as alterações constitui aceitação dos Termos modificados.</p>
+
+        <h2>10. Lei aplicável</h2>
+        <p>Estes Termos são regidos e interpretados de acordo com as leis do Estado da Califórnia, Estados Unidos, sem considerar seus princípios de conflito de leis. Qualquer disputa decorrente destes Termos ou do Aplicativo, ou a eles relacionada, deverá ser proposta exclusivamente nos tribunais estaduais ou federais localizados na Califórnia, e você consente com a jurisdição pessoal desses tribunais.</p>
+
+        <h2>11. Lojas de aplicativos</h2>
+        <p>O Aplicativo é distribuído por lojas de aplicativos — incluindo a App Store da Apple e o Google Play — e é licenciado a você, não vendido. Seu uso do Aplicativo também está sujeito aos termos da loja de onde você o baixou.</p>
+        <p><strong>App Store da Apple.</strong> O <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener noreferrer">Contrato de Licença de Aplicativo Licenciado com o Usuário Final (EULA)</a> padrão da Apple também se aplica ao seu uso do Aplicativo. A Apple não é parte destes Termos, não tem obrigação de fornecer manutenção ou suporte para o Aplicativo e não é responsável pelo Aplicativo nem pelo seu conteúdo. A Apple e suas subsidiárias são terceiras beneficiárias destes Termos e podem executá-los contra você.</p>
+        <p><strong>Google Play.</strong> Seu uso do Aplicativo também está sujeito aos <a href="https://play.google.com/about/play-terms/" target="_blank" rel="noopener noreferrer">Termos de Serviço do Google Play</a>. O Google não é parte destes Termos e não é responsável pelo Aplicativo nem pelo seu conteúdo.</p>
+
+        <h2>12. Independência das cláusulas</h2>
+        <p>Se qualquer disposição destes Termos for considerada inexequível, as demais disposições continuarão válidas e exequíveis.</p>
+
+        <div class="contact">
+          <h2>Fale conosco</h2>
+          <p>Se você tiver qualquer dúvida sobre estes Termos de Uso, escreva para:</p>
+          <a class="mail" href="mailto:braniapps@gmail.com">braniapps@gmail.com</a>
+        </div>
+
+        <a class="doc-back" href="index.html">← Voltar ao Suporte</a>
+      </article>
+    </div>
+
+    <footer>
+      <div class="wrap" style="max-width:1060px">
+        <div class="foot-top">
+          <div class="foot-brand">
+            <img src="app-icon.png" alt="Ícone do BredDay">
+            <div><b>BredDay</b><span>Calculadora de gestação e manejo reprodutivo</span></div>
+          </div>
+          <nav class="foot-links">
+            <a href="index.html">Suporte</a>
+            <a href="privacy.html">Política de Privacidade</a>
+            <a href="terms.html">Termos de Uso</a>
+            <a href="mailto:braniapps@gmail.com">Contato</a>
+          </nav>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 BredDay. Todos os direitos reservados.</span>
+          <span class="privacy-badge">🔒 Dados não coletados</span>
+        </div>
+      </div>
+    </footer>
+
+  </section>
+
+  <!-- ========================================================== ESPAÑOL == -->
+  <section data-lang="es" id="espanol" lang="es" aria-label="Español">
+
+    <div class="wrap">
+      <div class="doc-hero">
+        <span class="eyebrow">Legal</span>
+        <h1>Términos de Uso</h1>
+        <p class="app">BredDay — Calculadora de Gestación y Reproducción</p>
+        <span class="date">Fecha de entrada en vigor: 22 de julio de 2026</span>
       </div>
 
-      <h2>4. User Responsibilities</h2>
-      <p>You agree to:</p>
-      <ul>
-        <li>Use the App only for lawful purposes</li>
-        <li>Verify calculated dates and checkpoint guidance against your own records and professional advice</li>
-        <li>Not attempt to reverse engineer, decompile, or disassemble the App</li>
-        <li>Not use the App in any way that could damage, disable, or impair the service</li>
-      </ul>
+      <article class="doc">
+        <p class="intro">Lee estos Términos de Uso («Términos») con atención antes de usar la aplicación móvil BredDay («App»). En estos Términos, «nosotros» y «el desarrollador» se refieren al desarrollador y editor de BredDay. Al descargar, instalar o usar BredDay, aceptas quedar vinculado por estos Términos.</p>
 
-      <h2>5. Your Data</h2>
-      <p>All herd records you create in BredDay are stored locally on your device and belong to you. We recommend exporting your herd log periodically (CSV export) as a backup — deleting the App deletes its local data.</p>
+        <h2>1. Aceptación de los Términos</h2>
+        <p>Al acceder a BredDay o usarlo, aceptas estos Términos y nuestra <a href="privacy.html">Política de Privacidad</a>. Si no estás de acuerdo con estos Términos, no uses la App.</p>
 
-      <h2>6. Intellectual Property</h2>
-      <p>All content, features, and functionality of BredDay, including but not limited to text, graphics, logos, icons, images, and software, are the exclusive property of the developer and are protected by international copyright, trademark, and other intellectual property laws.</p>
+        <h2>2. Descripción del servicio</h2>
+        <p>BredDay es una herramienta de cálculo de gestación y registro reproductivo del ganado que ofrece:</p>
+        <ul>
+          <li>Cálculo de la fecha probable de parto a partir de la fecha de monta para bovinos, equinos, caprinos, ovinos, porcinos, conejos, alpacas y llamas</li>
+          <li>Historial de montas por animal, revisiones y registros de resultados</li>
+          <li>Una calculadora rápida de gestación (Cálculo rápido)</li>
+          <li>Vista de calendario con las fechas de parto y las revisiones</li>
+          <li>Recordatorios locales opcionales para las revisiones</li>
+          <li>Un widget de pantalla de inicio con los próximos partos</li>
+          <li>Exportación del registro del hato a CSV</li>
+        </ul>
 
-      <h2>7. Limitation of Liability</h2>
-      <p>To the maximum extent permitted by applicable law:</p>
-      <ul>
-        <li>BredDay is provided "as is" without warranties of any kind</li>
-        <li>We do not guarantee the accuracy of calculated due dates or the delivery of reminders</li>
-        <li>We are not liable for any indirect, incidental, special, consequential, or punitive damages, or for any loss of profits, revenue, livestock, or data — including animal loss, missed breeding or management windows, veterinary costs, or other economic loss — resulting from your use of or inability to use the App, even if we have been advised of the possibility of such damages</li>
-        <li>Our total liability shall not exceed the amount you paid for the App or subscription in the past 12 months</li>
-        <li>Some jurisdictions do not allow the exclusion or limitation of certain warranties or damages; in those jurisdictions, our liability is limited to the maximum extent permitted by law</li>
-      </ul>
+        <div class="callout">
+          <h3>No es asesoría veterinaria</h3>
+          <p><strong>BredDay es una utilidad de cálculo y registro, no un servicio veterinario. No ofrece asesoría veterinaria ni médica.</strong></p>
+          <p>Las duraciones de gestación y las cifras del ciclo de celo son valores de referencia de práctica común, tomados de tablas publicadas por servicios de extensión universitaria, y las plantillas de revisiones reflejan la práctica ganadera habitual. La gestación real varía según el animal, la raza, la salud y las condiciones. Confirma siempre las decisiones de manejo, los calendarios de vacunación y los planes de parto con tu veterinario. No nos hacemos responsables de los resultados de salud animal, de ventanas de monta perdidas ni de pérdidas de ningún tipo derivadas de confiar en las fechas calculadas o en los recordatorios de la App. La entrega de los recordatorios depende de los ajustes de tu dispositivo y del sistema operativo, y no está garantizada.</p>
+          <p><strong>Asunción de riesgo:</strong> la reproducción del ganado implica una variabilidad biológica inherente. Las duraciones de gestación, los ciclos de celo y los tiempos de las revisiones son promedios de los que cada animal puede desviarse. La App presenta todas las fechas calculadas como estimaciones, y tú confirmas expresamente este aviso dentro de la App antes de suscribirte. Al usar la App, reconoces esa variabilidad y aceptas asumir todo el riesgo derivado de las decisiones de cría, reproducción y manejo tomadas en relación con la App.</p>
+          <p><strong>Uso profesional:</strong> la App es una utilidad de cálculo y registro de uso general. No está certificada, validada ni destinada al uso veterinario clínico. Los veterinarios y demás profesionales del cuidado animal siguen siendo los únicos responsables de sus decisiones y de su estándar de atención, y no deben usar la App como sustituto del juicio profesional.</p>
+        </div>
 
-      <h2>8. Indemnification</h2>
-      <p>You agree to indemnify and hold harmless the developer of BredDay from any claims, damages, losses, or expenses arising from your use of the App or violation of these Terms.</p>
+        <h2>3. Suscripción BredDay Pro</h2>
+        <div class="panel">
+          <h3>Detalles de la suscripción</h3>
+          <p><strong>Producto:</strong> BredDay Pro</p>
 
-      <h2>9. Changes to Terms</h2>
-      <p>We reserve the right to modify these Terms at any time. Changes will be posted on this page with an updated effective date. Your continued use of the App after changes constitutes acceptance of the modified Terms.</p>
+          <h3>Opciones de precio</h3>
+          <ul>
+            <li><strong>Mensual:</strong> 2,99 USD al mes, o el equivalente en tu moneda local (renovación automática), con 2 semanas de prueba gratis</li>
+            <li><strong>Anual:</strong> 9,99 USD al año, o el equivalente en tu moneda local (renovación automática), con 2 semanas de prueba gratis</li>
+          </ul>
+          <p>Los precios se fijan por tienda y pueden variar según el país y la moneda; se aplica el precio que muestra tu tienda de aplicaciones en el momento de la compra.</p>
 
-      <h2>10. Governing Law</h2>
-      <p>These Terms shall be governed by and construed in accordance with the laws of the State of California, United States, without regard to its conflict of law principles. Any dispute arising out of or relating to these Terms or the App shall be brought exclusively in the state or federal courts located in California, and you consent to the personal jurisdiction of such courts.</p>
+          <h3>Suscripción obligatoria</h3>
+          <p>BredDay requiere una suscripción BredDay Pro activa para usar la app. Tu suscripción incluye acceso completo a todas las funciones:</p>
+          <ul>
+            <li>Cálculo de la fecha probable de parto y Cálculo rápido para las ocho especies</li>
+            <li>Animales ilimitados, con historial de montas, revisiones y recordatorios</li>
+            <li>Vista de calendario, widget de pantalla de inicio y exportación del hato a CSV</li>
+          </ul>
 
-      <h2>11. App Stores</h2>
-      <p>The App is distributed through app stores — including the Apple App Store and Google Play — and is licensed, not sold, to you. Your use of the App is also subject to the terms of whichever store you downloaded it from.</p>
-      <p><strong>Apple App Store.</strong> Apple's standard <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener noreferrer">Licensed Application End User License Agreement</a> also applies to your use of the App. Apple is not a party to these Terms, has no obligation to provide maintenance or support for the App, and is not responsible for the App or its content. Apple and its subsidiaries are third-party beneficiaries of these Terms and may enforce them against you.</p>
-      <p><strong>Google Play.</strong> Your use of the App is also subject to the <a href="https://play.google.com/about/play-terms/" target="_blank" rel="noopener noreferrer">Google Play Terms of Service</a>. Google is not a party to these Terms and is not responsible for the App or its content.</p>
+          <h3>Prueba gratis</h3>
+          <p>Ambos planes incluyen 2 semanas de prueba gratis introductoria para nuevos suscriptores, para que uses la app completa durante dos semanas antes de cualquier cargo. Si no cancelas antes de que termine la prueba, la suscripción comienza y el cargo se hace a tu cuenta de la tienda de aplicaciones (como tu Apple ID o tu cuenta de Google).</p>
 
-      <h2>12. Severability</h2>
-      <p>If any provision of these Terms is found to be unenforceable, the remaining provisions will continue to be valid and enforceable.</p>
+          <h3>Renovación automática</h3>
+          <p>Tu suscripción (mensual o anual) se renovará automáticamente a menos que desactives la renovación automática al menos 24 horas antes del final del período vigente. El cargo por la renovación se hace a tu cuenta dentro de las 24 horas previas al final del período vigente.</p>
 
-      <div class="contact">
-        <h2>Contact Us</h2>
-        <p>If you have any questions about these Terms of Use, please contact us at:</p>
-        <a class="mail" href="mailto:braniapps@gmail.com">braniapps@gmail.com</a>
+          <h3>Cómo gestionar tu suscripción</h3>
+          <p>Puedes gestionar o cancelar tu suscripción en cualquier momento desde la configuración de tu cuenta en la tienda de aplicaciones — en iOS en Configuración &gt; [Tu nombre] &gt; Suscripciones, o en Android en Google Play Store &gt; Suscripciones.</p>
+
+          <h3>Reembolsos</h3>
+          <p>Todas las compras las procesa la tienda de aplicaciones desde la que descargaste BredDay (como el App Store de Apple o Google Play). Las solicitudes de reembolso deben hacerse a través de esa tienda, según sus políticas de reembolso.</p>
+        </div>
+
+        <h2>4. Responsabilidades del usuario</h2>
+        <p>Te comprometes a:</p>
+        <ul>
+          <li>Usar la App solo para fines lícitos</li>
+          <li>Verificar las fechas calculadas y las indicaciones de las revisiones contra tus propios registros y la asesoría profesional</li>
+          <li>No intentar aplicar ingeniería inversa, descompilar ni desensamblar la App</li>
+          <li>No usar la App de ninguna forma que pueda dañar, deshabilitar o degradar el servicio</li>
+        </ul>
+
+        <h2>5. Tus datos</h2>
+        <p>Todos los registros del hato que creas en BredDay se guardan localmente en tu dispositivo y te pertenecen. Te recomendamos exportar el registro del hato periódicamente (exportación a CSV) como respaldo — al borrar la App se borran sus datos locales.</p>
+
+        <h2>6. Propiedad intelectual</h2>
+        <p>Todo el contenido, las funciones y la funcionalidad de BredDay — incluidos, entre otros, los textos, gráficos, logotipos, íconos, imágenes y software — son propiedad exclusiva del desarrollador y están protegidos por las leyes internacionales de derechos de autor, marcas y demás leyes de propiedad intelectual.</p>
+
+        <h2>7. Limitación de responsabilidad</h2>
+        <p>En la máxima medida permitida por la ley aplicable:</p>
+        <ul>
+          <li>BredDay se ofrece «tal cual», sin garantías de ningún tipo</li>
+          <li>No garantizamos la exactitud de las fechas de parto calculadas ni la entrega de los recordatorios</li>
+          <li>No somos responsables de daños indirectos, incidentales, especiales, consecuentes o punitivos, ni de pérdidas de ganancias, ingresos, ganado o datos — incluida la pérdida de animales, ventanas de monta o de manejo perdidas, gastos veterinarios u otras pérdidas económicas — derivados del uso o de la imposibilidad de usar la App, incluso si se nos advirtió de la posibilidad de tales daños</li>
+          <li>Nuestra responsabilidad total no excederá la cantidad que pagaste por la App o la suscripción en los últimos 12 meses</li>
+          <li>Algunas jurisdicciones no permiten la exclusión o limitación de ciertas garantías o daños; en esas jurisdicciones, nuestra responsabilidad queda limitada en la máxima medida permitida por la ley</li>
+        </ul>
+
+        <h2>8. Indemnización</h2>
+        <p>Aceptas indemnizar y mantener indemne al desarrollador de BredDay frente a cualquier reclamación, daño, pérdida o gasto derivado de tu uso de la App o del incumplimiento de estos Términos.</p>
+
+        <h2>9. Cambios en los Términos</h2>
+        <p>Nos reservamos el derecho de modificar estos Términos en cualquier momento. Los cambios se publicarán en esta página con una nueva fecha de entrada en vigor. Seguir usando la App después de los cambios constituye la aceptación de los Términos modificados.</p>
+
+        <h2>10. Ley aplicable</h2>
+        <p>Estos Términos se rigen e interpretan de acuerdo con las leyes del Estado de California, Estados Unidos, sin atender a sus principios sobre conflicto de leyes. Cualquier disputa que surja de estos Términos o de la App, o esté relacionada con ellos, deberá presentarse exclusivamente ante los tribunales estatales o federales ubicados en California, y aceptas la jurisdicción personal de dichos tribunales.</p>
+
+        <h2>11. Tiendas de aplicaciones</h2>
+        <p>La App se distribuye a través de tiendas de aplicaciones — incluidos el App Store de Apple y Google Play — y se te otorga bajo licencia, no se te vende. Tu uso de la App también está sujeto a los términos de la tienda desde la que la descargaste.</p>
+        <p><strong>App Store de Apple.</strong> El <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener noreferrer">Acuerdo de Licencia de Aplicación con el Usuario Final</a> estándar de Apple también se aplica a tu uso de la App. Apple no es parte de estos Términos, no tiene obligación de dar mantenimiento ni soporte a la App y no es responsable de la App ni de su contenido. Apple y sus filiales son terceros beneficiarios de estos Términos y pueden hacerlos valer frente a ti.</p>
+        <p><strong>Google Play.</strong> Tu uso de la App también está sujeto a las <a href="https://play.google.com/about/play-terms/" target="_blank" rel="noopener noreferrer">Condiciones de Servicio de Google Play</a>. Google no es parte de estos Términos y no es responsable de la App ni de su contenido.</p>
+
+        <h2>12. Divisibilidad</h2>
+        <p>Si alguna disposición de estos Términos se considera inaplicable, las demás disposiciones seguirán siendo válidas y aplicables.</p>
+
+        <div class="contact">
+          <h2>Contáctanos</h2>
+          <p>Si tienes cualquier duda sobre estos Términos de Uso, escríbenos a:</p>
+          <a class="mail" href="mailto:braniapps@gmail.com">braniapps@gmail.com</a>
+        </div>
+
+        <a class="doc-back" href="index.html">← Volver a Soporte</a>
+      </article>
+    </div>
+
+    <footer>
+      <div class="wrap" style="max-width:1060px">
+        <div class="foot-top">
+          <div class="foot-brand">
+            <img src="app-icon.png" alt="Ícono de BredDay">
+            <div><b>BredDay</b><span>Calculadora de gestación y reproducción</span></div>
+          </div>
+          <nav class="foot-links">
+            <a href="index.html">Soporte</a>
+            <a href="privacy.html">Política de Privacidad</a>
+            <a href="terms.html">Términos de Uso</a>
+            <a href="mailto:braniapps@gmail.com">Contacto</a>
+          </nav>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 BredDay. Todos los derechos reservados.</span>
+          <span class="privacy-badge">🔒 No se recopilan datos</span>
+        </div>
       </div>
+    </footer>
 
-      <a class="doc-back" href="index.html">← Back to Support</a>
-    </article>
-  </div>
+  </section>
+
 </main>
-
-<footer>
-  <div class="wrap" style="max-width:1060px">
-    <div class="foot-top">
-      <div class="foot-brand">
-        <img src="app-icon.png" alt="BredDay icon">
-        <div><b>BredDay</b><span>Livestock gestation &amp; breeding calculator</span></div>
-      </div>
-      <nav class="foot-links">
-        <a href="https://branicio.github.io/bredday-support/">Support</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="mailto:braniapps@gmail.com">Contact</a>
-      </nav>
-    </div>
-    <div class="foot-bottom">
-      <span>© 2026 BredDay. All rights reserved.</span>
-      <span class="privacy-badge">🔒 Data Not Collected</span>
-    </div>
-  </div>
-</footer>
 
 </body>
 </html>
