@@ -1,6 +1,6 @@
 # BredDay Support
 
-Support website for the BredDay iOS app — livestock gestation & breeding calculator.
+Support website for the BredDay iOS & Android apps — livestock gestation & breeding calculator.
 
 Hosted via GitHub Pages at: https://branicio.github.io/bredday-support/
 
