@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BredDay — Livestock Gestation &amp; Breeding Calculator</title>
-<meta name="description" content="BredDay is the offline gestation & breeding calculator for cattle, horses, goats, sheep, pigs, rabbits, alpacas & llamas. Due dates, checkpoints, reminders, and a countdown widget. No ads. No tracking. In English, Portuguese and Spanish.">
+<meta name="description" content="BredDay is the offline gestation & breeding calculator for cattle, horses, goats, sheep, pigs, rabbits, alpacas & llamas. Due dates, checkpoints, reminders, and a countdown widget. No ads. No tracking. In English, Portuguese, Spanish, French and Italian.">
 <link rel="icon" href="app-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,7 +67,7 @@
 
   /* ---------- Language switch ----------
      .langtabs is the role="tablist"; site.js maintains aria-selected,
-     aria-controls and tabindex on the buttons. Hidden without JS: all three
+     aria-controls and tabindex on the buttons. Hidden without JS: all five
      languages already render stacked then, so a switch that cannot switch
      anything would only be a trap. */
   .langtabs{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(--paper-2);border:1px solid var(--hair);flex:none}
@@ -79,7 +79,7 @@
 
   /* Languages are hidden ONLY when site.js has announced itself by setting
      data-js on <html>. If the script never runs or throws, this selector
-     stops matching and all three languages render stacked — readable,
+     stops matching and all five languages render stacked — readable,
      anchor-navigable, and complete. Never hide [data-lang] outside an
      html[data-js="on"] scope. */
   html[data-js="on"] [data-lang]{display:none}
@@ -236,15 +236,17 @@
 <header class="site">
   <div class="wrap nav">
     <a class="brand" href="index.html"><img src="app-icon.png" alt="BredDay icon"><b>BredDay</b></a>
-    <nav class="nav-links" aria-label="Main" data-i18n-aria-en="Main" data-i18n-aria-pt="Principal" data-i18n-aria-es="Principal">
-      <a href="index.html" class="active" aria-current="page" data-i18n-en="Home" data-i18n-pt="Início" data-i18n-es="Inicio">Home</a>
-      <a href="privacy.html" data-i18n-en="Privacy" data-i18n-pt="Privacidade" data-i18n-es="Privacidad">Privacy</a>
-      <a href="terms.html" data-i18n-en="Terms" data-i18n-pt="Termos" data-i18n-es="Términos">Terms</a>
+    <nav class="nav-links" aria-label="Main" data-i18n-aria-en="Main" data-i18n-aria-pt="Principal" data-i18n-aria-es="Principal" data-i18n-aria-fr="Principale" data-i18n-aria-it="Principale">
+      <a href="index.html" class="active" aria-current="page" data-i18n-en="Home" data-i18n-pt="Início" data-i18n-es="Inicio" data-i18n-fr="Accueil" data-i18n-it="Home">Home</a>
+      <a href="privacy.html" data-i18n-en="Privacy" data-i18n-pt="Privacidade" data-i18n-es="Privacidad" data-i18n-fr="Confidentialité" data-i18n-it="Privacy">Privacy</a>
+      <a href="terms.html" data-i18n-en="Terms" data-i18n-pt="Termos" data-i18n-es="Términos" data-i18n-fr="Conditions" data-i18n-it="Termini">Terms</a>
     </nav>
-    <div class="langtabs" role="tablist" aria-label="Language" data-i18n-aria-en="Language" data-i18n-aria-pt="Idioma" data-i18n-aria-es="Idioma">
+    <div class="langtabs" role="tablist" aria-label="Language" data-i18n-aria-en="Language" data-i18n-aria-pt="Idioma" data-i18n-aria-es="Idioma" data-i18n-aria-fr="Langue" data-i18n-aria-it="Lingua">
       <button type="button" role="tab" data-lang-target="en" aria-label="English">EN</button>
       <button type="button" role="tab" data-lang-target="pt" aria-label="Português">PT</button>
       <button type="button" role="tab" data-lang-target="es" aria-label="Español">ES</button>
+      <button type="button" role="tab" data-lang-target="fr" aria-label="Français">FR</button>
+      <button type="button" role="tab" data-lang-target="it" aria-label="Italiano">IT</button>
     </div>
   </div>
 </header>
@@ -678,6 +680,294 @@
         <div class="foot-bottom">
           <span>© 2026 BredDay. Hecho para ganaderos y pequeños criadores.</span>
           <span class="privacy-badge">🔒 No se recopilan datos</span>
+        </div>
+      </div>
+    </footer>
+
+  </section>
+
+  <!-- ========================================================== FRANÇAIS ==
+       Clone structurel du bloc en anglais — seuls le texte et
+       data-lang / id / lang / aria-label changent. -->
+  <section data-lang="fr" id="francais" lang="fr" aria-label="Français">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <img src="app-icon.png" alt="Icône de l’app BredDay — une vache" class="hero-icon">
+        <h1>BredDay</h1>
+        <p class="lede">Entrez la date de saillie, obtenez la date de mise bas.</p>
+        <p class="sub">Le calculateur de gestation et de reproduction conçu pour le terrain — bovins, équins, caprins, ovins, porcins, lapins, alpagas et lamas.</p>
+        <div class="chips">
+          <span class="chip">🚫 Jamais de publicité</span>
+          <span class="chip">📶 Fonctionne hors ligne</span>
+          <span class="chip">🔒 Aucun pistage</span>
+          <span class="chip">🐄 8 espèces</span>
+        </div>
+        <div class="badges">
+          <a href="https://apps.apple.com/app/id6793699937"><img class="as" src="badges/app-store-fr-fr.svg" alt="Télécharger dans l’App Store"></a>
+          <a href="https://play.google.com/store/apps/details?id=com.branicio.bredday"><img class="gp" src="badges/google-play-fr.png" alt="Disponible sur Google Play"></a>
+        </div>
+        <p class="platform">iOS &middot; iPadOS &middot; Android &middot; Essai gratuit de 2 semaines</p>
+      </div>
+    </section>
+
+    <!-- FONCTIONNALITÉS -->
+    <section class="blk">
+      <div class="wrap">
+        <span class="eyebrow">Ce que fait BredDay</span>
+        <h2 class="sec-title">Tout ce qu’il vous faut, de la saillie à la mise bas</h2>
+        <p class="sec-intro">Une seule app bien rangée pour tout le cycle — calculez la date de mise bas, tenez votre troupeau à jour et ne manquez aucune étape, le tout sans réseau.</p>
+
+        <div class="grid">
+          <article class="feature">
+            <div class="badge">📅</div>
+            <h3>Des dates de mise bas fiables</h3>
+            <p>Saisissez la date de saillie et obtenez aussitôt la date de mise bas prévue — avec des durées de gestation propres à chaque race, et une durée personnalisable par animal quand vous connaissez vos bêtes mieux que n’importe quel tableau.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">🐮</div>
+            <h3>Tout votre troupeau, en ordre</h3>
+            <p>Enregistrez chaque animal, suivez l’historique des saillies et leurs issues (nés vivants et perdus), et repérez d’un coup d’œil les bêtes les plus proches du terme — triées par échéance, avec un code couleur.</p>
+          </article>
+
+          <article class="feature">
+            <span class="tag">Nouveau</span>
+            <div class="badge">✅</div>
+            <h3>Étapes de suivi et rappels</h3>
+            <p>Des modèles d’étapes de suivi fondés sur la pratique vétérinaire pour chaque espèce — <strong>et vos propres étapes personnalisées</strong>, adaptées à la façon dont votre élevage fonctionne vraiment, chacune avec un rappel local facultatif.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">🗓️</div>
+            <h3>Vue calendrier</h3>
+            <p>Chaque mise bas prévue et chaque étape sur un calendrier mensuel, pour ne jamais être pris de court en pleine saison.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">📲</div>
+            <h3>Widget pour l’écran d’accueil</h3>
+            <p>Un compte à rebours directement sur votre écran d’accueil — « Marguerite · 14j » — et les trois prochaines échéances. Un coup d’œil suffit.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">⚡</div>
+            <h3>Calcul rapide</h3>
+            <p>Besoin d’une réponse rapide au couloir de contention ? Choisissez une espèce et une date — la date de mise bas sur-le-champ, rien à enregistrer.</p>
+          </article>
+
+          <article class="feature wide">
+            <div class="badge">🔒</div>
+            <h3>Confidentiel dès la conception — et ça fonctionne à l’étable</h3>
+            <p>100 % hors ligne : pas de réseau, pas de problème — et aucun compte à créer. Pas de publicité, pas d’analyse, pas de suivi : les données de votre troupeau ne quittent jamais votre téléphone (les étiquettes de confidentialité de l’App Store et de Google Play indiquent <em>Données non collectées / Aucune donnée partagée</em>). Exportez tout le troupeau en CSV dès que vos données doivent aller ailleurs.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALMANACH DE LA GESTATION -->
+    <section class="blk almanac">
+      <div class="wrap">
+        <span class="eyebrow">La gestation en un coup d’œil</span>
+        <h2 class="sec-title">Huit espèces, données intégrées et hors ligne</h2>
+        <div class="species">
+          <div class="beast"><span class="em">🐄</span><div class="nm">Bovins</div><div class="dy">283</div><div class="un">jours</div></div>
+          <div class="beast"><span class="em">🐴</span><div class="nm">Équins</div><div class="dy">340</div><div class="un">jours</div></div>
+          <div class="beast"><span class="em">🐐</span><div class="nm">Caprins</div><div class="dy">150</div><div class="un">jours</div></div>
+          <div class="beast"><span class="em">🐑</span><div class="nm">Ovins</div><div class="dy">147</div><div class="un">jours</div></div>
+          <div class="beast"><span class="em">🐷</span><div class="nm">Porcins</div><div class="dy">114</div><div class="un">jours</div></div>
+          <div class="beast"><span class="em">🐰</span><div class="nm">Lapins</div><div class="dy">31</div><div class="un">jours</div></div>
+          <div class="beast"><span class="em">🦙</span><div class="nm">Alpagas</div><div class="dy">345</div><div class="un">jours</div></div>
+          <div class="beast"><span class="em">🦙</span><div class="nm">Lamas</div><div class="dy">350</div><div class="un">jours</div></div>
+        </div>
+        <p class="note">Moyennes tirées des tables de gestation publiées par des services universitaires de vulgarisation agricole, avec des ajustements par race intégrés. Chaque troupeau est différent — modifiez la durée pour n’importe quel animal. Les modèles d’étapes de suivi décrivent une pratique courante, pas un avis vétérinaire ; confirmez le calendrier avec votre vétérinaire.</p>
+      </div>
+    </section>
+
+    <!-- BANDEAU D’IDENTITÉ -->
+    <section class="blk band">
+      <div class="wrap">
+        <p class="q">Aucune publicité. Aucun compte. <em>Fonctionne sans réseau, même à l’étable.</em></p>
+        <small>C’est toute notre promesse.</small>
+      </div>
+    </section>
+
+    <!-- ASSISTANCE -->
+    <section class="blk support">
+      <div class="wrap">
+        <span class="eyebrow" style="justify-content:center">Besoin d’un coup de main ?</span>
+        <h2 class="sec-title">Nous sommes là pour vous aider</h2>
+        <p class="sec-intro">Une question, une suggestion, une espèce ou une race que vous aimeriez voir ajoutée, ou un problème à signaler — écrivez-nous et une vraie personne vous lira.</p>
+        <a class="cta" href="mailto:braniapps@gmail.com">✉️ Écrire à l’assistance</a>
+        <p class="respond">braniapps@gmail.com · nous nous efforçons de répondre sous quelques jours</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot-top">
+          <div class="foot-brand">
+            <img src="app-icon.png" alt="Icône de BredDay">
+            <div>
+              <b>BredDay</b>
+              <span>Calculateur de gestation et de reproduction</span>
+            </div>
+          </div>
+          <nav class="foot-links">
+            <a href="index.html">Assistance</a>
+            <a href="privacy.html">Politique de confidentialité</a>
+            <a href="terms.html">Conditions d’utilisation</a>
+            <a href="mailto:braniapps@gmail.com">Contact</a>
+          </nav>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 BredDay. Conçu pour les éleveurs et les petites exploitations.</span>
+          <span class="privacy-badge">🔒 Données non collectées</span>
+        </div>
+      </div>
+    </footer>
+
+  </section>
+
+  <!-- ========================================================= ITALIANO ==
+       Clone strutturale del blocco in inglese — cambiano solo il testo e
+       data-lang / id / lang / aria-label. -->
+  <section data-lang="it" id="italiano" lang="it" aria-label="Italiano">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <img src="app-icon.png" alt="Icona di BredDay — una mucca" class="hero-icon">
+        <h1>BredDay</h1>
+        <p class="lede">Inserisci la data della monta, ottieni la data del parto.</p>
+        <p class="sub">Il calcolatore di gestazione e riproduzione del bestiame pensato per la stalla — per bovini, equini, caprini, ovini, suini, conigli, alpaca e lama.</p>
+        <div class="chips">
+          <span class="chip">🚫 Niente pubblicità, mai</span>
+          <span class="chip">📶 Funziona offline</span>
+          <span class="chip">🔒 Nessun tracciamento</span>
+          <span class="chip">🐄 8 specie</span>
+        </div>
+        <div class="badges">
+          <a href="https://apps.apple.com/app/id6793699937"><img class="as" src="badges/app-store-it-it.svg" alt="Scarica su App Store"></a>
+          <a href="https://play.google.com/store/apps/details?id=com.branicio.bredday"><img class="gp" src="badges/google-play-it.png" alt="Disponibile su Google Play"></a>
+        </div>
+        <p class="platform">iOS &middot; iPadOS &middot; Android &middot; Prova gratuita di 2 settimane</p>
+      </div>
+    </section>
+
+    <!-- FUNZIONALITÀ -->
+    <section class="blk">
+      <div class="wrap">
+        <span class="eyebrow">Cosa fa BredDay</span>
+        <h2 class="sec-title">Tutto ciò che ti serve, dalla monta al parto</h2>
+        <p class="sec-intro">Un’unica app ordinata per tutto il ciclo — calcola la data presunta del parto, tieni in ordine il bestiame e non perdere mai una tappa, il tutto senza segnale.</p>
+
+        <div class="grid">
+          <article class="feature">
+            <div class="badge">📅</div>
+            <h3>Date del parto affidabili</h3>
+            <p>Inserisci la data della monta e ottieni subito la data presunta del parto — con durate della gestazione specifiche per razza e un valore personalizzabile per ogni animale, per quando conosci i tuoi capi meglio di qualsiasi tabella.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">🐮</div>
+            <h3>Tutto il bestiame, in ordine</h3>
+            <p>Registra ogni animale, segui lo storico delle monte e gli esiti (nati vivi e persi) e vedi a colpo d’occhio chi è più vicino al parto — in ordine e con colori in base a quanto manca.</p>
+          </article>
+
+          <article class="feature">
+            <span class="tag">Novità</span>
+            <div class="badge">✅</div>
+            <h3>Tappe e promemoria</h3>
+            <p>Modelli di tappe basati sulla pratica veterinaria per ogni specie — <strong>più le tue tappe personalizzate</strong>, su misura per come funziona davvero la tua azienda, ognuna con un promemoria locale facoltativo.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">🗓️</div>
+            <h3>Vista calendario</h3>
+            <p>Ogni parto previsto e ogni tappa su un calendario mensile, così niente ti coglie di sorpresa a metà stagione.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">📲</div>
+            <h3>Widget nella schermata Home</h3>
+            <p>Il conto alla rovescia direttamente nella schermata Home — “Stella · 14g” — e i tre parti successivi in arrivo. Basta un’occhiata, senza cercare.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">⚡</div>
+            <h3>Calcolo rapido</h3>
+            <p>Ti serve una risposta al volo, lì alla gabbia di contenimento? Scegli una specie e una data — la data del parto all’istante, niente da salvare.</p>
+          </article>
+
+          <article class="feature wide">
+            <div class="badge">🔒</div>
+            <h3>Privacy fin dalla progettazione — e funziona in stalla</h3>
+            <p>100% offline: niente segnale, nessun problema, e nessun account da creare. Niente pubblicità, niente analisi, nessun tracciamento — i dati del tuo bestiame non lasciano mai il telefono (le etichette sulla privacy di App Store e Google Play riportano <em>Dati non raccolti / Nessun dato condiviso</em>). Esporta tutto il bestiame in CSV ogni volta che i dati devono andare altrove.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALMANACCO DELLA GESTAZIONE -->
+    <section class="blk almanac">
+      <div class="wrap">
+        <span class="eyebrow">La gestazione a colpo d’occhio</span>
+        <h2 class="sec-title">Otto specie, con i dati integrati e offline</h2>
+        <div class="species">
+          <div class="beast"><span class="em">🐄</span><div class="nm">Bovini</div><div class="dy">283</div><div class="un">giorni</div></div>
+          <div class="beast"><span class="em">🐴</span><div class="nm">Equini</div><div class="dy">340</div><div class="un">giorni</div></div>
+          <div class="beast"><span class="em">🐐</span><div class="nm">Caprini</div><div class="dy">150</div><div class="un">giorni</div></div>
+          <div class="beast"><span class="em">🐑</span><div class="nm">Ovini</div><div class="dy">147</div><div class="un">giorni</div></div>
+          <div class="beast"><span class="em">🐷</span><div class="nm">Suini</div><div class="dy">114</div><div class="un">giorni</div></div>
+          <div class="beast"><span class="em">🐰</span><div class="nm">Conigli</div><div class="dy">31</div><div class="un">giorni</div></div>
+          <div class="beast"><span class="em">🦙</span><div class="nm">Alpaca</div><div class="dy">345</div><div class="un">giorni</div></div>
+          <div class="beast"><span class="em">🦙</span><div class="nm">Lama</div><div class="dy">350</div><div class="un">giorni</div></div>
+        </div>
+        <p class="note">Medie tratte dalle tabelle di gestazione pubblicate dai servizi di divulgazione agraria delle università, con gli adattamenti per razza già inclusi. Ogni allevamento è diverso — modifica la durata su qualsiasi animale. I modelli di tappe descrivono la pratica comune, non sono un parere veterinario; verifica le tempistiche con il tuo veterinario.</p>
+      </div>
+    </section>
+
+    <!-- FASCIA DI IDENTITÀ -->
+    <section class="blk band">
+      <div class="wrap">
+        <p class="q">Niente pubblicità. Niente account. <em>Funziona senza segnale in stalla.</em></p>
+        <small>Questa è tutta la nostra promessa.</small>
+      </div>
+    </section>
+
+    <!-- ASSISTENZA -->
+    <section class="blk support">
+      <div class="wrap">
+        <span class="eyebrow" style="justify-content:center">Ti serve una mano?</span>
+        <h2 class="sec-title">Siamo qui per aiutarti</h2>
+        <p class="sec-intro">Domande, suggerimenti, una specie o una razza che vorresti vedere nell’app, o un bug da segnalare — scrivici e una persona vera leggerà il tuo messaggio.</p>
+        <a class="cta" href="mailto:braniapps@gmail.com">✉️ Scrivi all’assistenza</a>
+        <p class="respond">braniapps@gmail.com · cerchiamo di rispondere entro un paio di giorni</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot-top">
+          <div class="foot-brand">
+            <img src="app-icon.png" alt="Icona di BredDay">
+            <div>
+              <b>BredDay</b>
+              <span>Calcolatore di gestazione e riproduzione del bestiame</span>
+            </div>
+          </div>
+          <nav class="foot-links">
+            <a href="index.html">Assistenza</a>
+            <a href="privacy.html">Informativa sulla privacy</a>
+            <a href="terms.html">Termini di utilizzo</a>
+            <a href="mailto:braniapps@gmail.com">Contatti</a>
+          </nav>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 BredDay. Fatto per allevatori e piccole aziende agricole.</span>
+          <span class="privacy-badge">🔒 Dati non raccolti</span>
         </div>
       </div>
     </footer>
