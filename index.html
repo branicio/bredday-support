@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BredDay — Livestock Gestation &amp; Breeding Calculator</title>
-<meta name="description" content="BredDay is the offline gestation & breeding calculator for cattle, horses, goats, sheep, pigs, rabbits, alpacas & llamas. Due dates, checkpoints, reminders, and a countdown widget. No ads. No tracking. In English, Portuguese, Spanish, French and Italian.">
+<meta name="description" content="BredDay is the offline gestation & breeding calculator for cattle, horses, goats, sheep, pigs, rabbits, alpacas & llamas. Due dates, checkpoints, reminders, and a countdown widget. No ads. No tracking. In English, Portuguese, Spanish, French, Italian and German.">
 <link rel="icon" href="app-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,7 +67,7 @@
 
   /* ---------- Language switch ----------
      .langtabs is the role="tablist"; site.js maintains aria-selected,
-     aria-controls and tabindex on the buttons. Hidden without JS: all five
+     aria-controls and tabindex on the buttons. Hidden without JS: all six
      languages already render stacked then, so a switch that cannot switch
      anything would only be a trap. */
   .langtabs{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(--paper-2);border:1px solid var(--hair);flex:none}
@@ -79,7 +79,7 @@
 
   /* Languages are hidden ONLY when site.js has announced itself by setting
      data-js on <html>. If the script never runs or throws, this selector
-     stops matching and all five languages render stacked — readable,
+     stops matching and all six languages render stacked — readable,
      anchor-navigable, and complete. Never hide [data-lang] outside an
      html[data-js="on"] scope. */
   html[data-js="on"] [data-lang]{display:none}
@@ -236,17 +236,18 @@
 <header class="site">
   <div class="wrap nav">
     <a class="brand" href="index.html"><img src="app-icon.png" alt="BredDay icon"><b>BredDay</b></a>
-    <nav class="nav-links" aria-label="Main" data-i18n-aria-en="Main" data-i18n-aria-pt="Principal" data-i18n-aria-es="Principal" data-i18n-aria-fr="Principale" data-i18n-aria-it="Principale">
-      <a href="index.html" class="active" aria-current="page" data-i18n-en="Home" data-i18n-pt="Início" data-i18n-es="Inicio" data-i18n-fr="Accueil" data-i18n-it="Home">Home</a>
-      <a href="privacy.html" data-i18n-en="Privacy" data-i18n-pt="Privacidade" data-i18n-es="Privacidad" data-i18n-fr="Confidentialité" data-i18n-it="Privacy">Privacy</a>
-      <a href="terms.html" data-i18n-en="Terms" data-i18n-pt="Termos" data-i18n-es="Términos" data-i18n-fr="Conditions" data-i18n-it="Termini">Terms</a>
+    <nav class="nav-links" aria-label="Main" data-i18n-aria-en="Main" data-i18n-aria-pt="Principal" data-i18n-aria-es="Principal" data-i18n-aria-fr="Principale" data-i18n-aria-it="Principale" data-i18n-aria-de="Hauptnavigation">
+      <a href="index.html" class="active" aria-current="page" data-i18n-en="Home" data-i18n-pt="Início" data-i18n-es="Inicio" data-i18n-fr="Accueil" data-i18n-it="Home" data-i18n-de="Start">Home</a>
+      <a href="privacy.html" data-i18n-en="Privacy" data-i18n-pt="Privacidade" data-i18n-es="Privacidad" data-i18n-fr="Confidentialité" data-i18n-it="Privacy" data-i18n-de="Datenschutz">Privacy</a>
+      <a href="terms.html" data-i18n-en="Terms" data-i18n-pt="Termos" data-i18n-es="Términos" data-i18n-fr="Conditions" data-i18n-it="Termini" data-i18n-de="Nutzungsbedingungen">Terms</a>
     </nav>
-    <div class="langtabs" role="tablist" aria-label="Language" data-i18n-aria-en="Language" data-i18n-aria-pt="Idioma" data-i18n-aria-es="Idioma" data-i18n-aria-fr="Langue" data-i18n-aria-it="Lingua">
+    <div class="langtabs" role="tablist" aria-label="Language" data-i18n-aria-en="Language" data-i18n-aria-pt="Idioma" data-i18n-aria-es="Idioma" data-i18n-aria-fr="Langue" data-i18n-aria-it="Lingua" data-i18n-aria-de="Sprache">
       <button type="button" role="tab" data-lang-target="en" aria-label="English">EN</button>
       <button type="button" role="tab" data-lang-target="pt" aria-label="Português">PT</button>
       <button type="button" role="tab" data-lang-target="es" aria-label="Español">ES</button>
       <button type="button" role="tab" data-lang-target="fr" aria-label="Français">FR</button>
       <button type="button" role="tab" data-lang-target="it" aria-label="Italiano">IT</button>
+      <button type="button" role="tab" data-lang-target="de" aria-label="Deutsch">DE</button>
     </div>
   </div>
 </header>
@@ -255,8 +256,8 @@
 
   <!-- ============================================================ ENGLISH ==
        site.js stamps role="tabpanel", id, and aria-hidden here. id="portugues"
-       / id="espanol" below are the app's deep-link anchors; id="top" stays on
-       the English <h1> alone. -->
+       / id="espanol" / id="francais" / id="italiano" / id="deutsch" below are
+       the app's deep-link anchors; id="top" stays on the English <h1> alone. -->
   <section data-lang="en" lang="en" aria-label="English">
 
     <!-- HERO -->
@@ -968,6 +969,150 @@
         <div class="foot-bottom">
           <span>© 2026 BredDay. Fatto per allevatori e piccole aziende agricole.</span>
           <span class="privacy-badge">🔒 Dati non raccolti</span>
+        </div>
+      </div>
+    </footer>
+
+  </section>
+
+  <!-- ========================================================== DEUTSCH ==
+       Strukturklon des englischen Blocks – nur der Text und
+       data-lang / id / lang / aria-label ändern sich. -->
+  <section data-lang="de" id="deutsch" lang="de" aria-label="Deutsch">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <img src="app-icon.png" alt="App-Symbol von BredDay – eine Kuh" class="hero-icon">
+        <h1>BredDay</h1>
+        <p class="lede">Belegdatum rein, Geburtstermin raus.</p>
+        <p class="sub">Der Trächtigkeits- und Belegungsrechner für Nutztiere, gemacht für den Stall – für Rinder, Pferde, Ziegen, Schafe, Schweine, Kaninchen, Alpakas und Lamas.</p>
+        <div class="chips">
+          <span class="chip">🚫 Niemals Werbung</span>
+          <span class="chip">📶 Funktioniert offline</span>
+          <span class="chip">🔒 Kein Tracking</span>
+          <span class="chip">🐄 8 Tierarten</span>
+        </div>
+        <div class="badges">
+          <a href="https://apps.apple.com/app/id6793699937"><img class="as" src="badges/app-store-de-de.svg" alt="Laden im App Store"></a>
+          <a href="https://play.google.com/store/apps/details?id=com.branicio.bredday"><img class="gp" src="badges/google-play-de.png" alt="Jetzt bei Google Play"></a>
+        </div>
+        <p class="platform">iOS &middot; iPadOS &middot; Android &middot; 2 Wochen kostenlos testen</p>
+      </div>
+    </section>
+
+    <!-- FUNKTIONEN -->
+    <section class="blk">
+      <div class="wrap">
+        <span class="eyebrow">Was BredDay kann</span>
+        <h2 class="sec-title">Alles, was du brauchst – von der Belegung bis zur Geburt</h2>
+        <p class="sec-intro">Eine übersichtliche App für den ganzen Zyklus – Geburtstermin berechnen, die Herde im Griff behalten und keine Maßnahme verpassen, alles ohne Empfang.</p>
+
+        <div class="grid">
+          <article class="feature">
+            <div class="badge">📅</div>
+            <h3>Geburtstermine, auf die du dich verlassen kannst</h3>
+            <p>Gib das Belegdatum ein und erhalte sofort den voraussichtlichen Geburtstermin – mit rassespezifischen Trächtigkeitsdauern und einer eigenen Dauer pro Tier, wenn du deine Tiere besser kennst als jede Tabelle.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">🐮</div>
+            <h3>Deine ganze Herde, gut sortiert</h3>
+            <p>Erfasse jedes Tier, verfolge Belegungsverlauf und Geburten (lebend und verloren) und sieh auf einen Blick, welche Tiere dem Geburtstermin am nächsten sind – sortiert und farbig markiert, je nachdem, wie bald es so weit ist.</p>
+          </article>
+
+          <article class="feature">
+            <span class="tag">Neu</span>
+            <div class="badge">✅</div>
+            <h3>Maßnahmen und Erinnerungen</h3>
+            <p>An tierärztlicher Praxis orientierte Maßnahmen-Vorlagen für jede Tierart – <strong>dazu deine eigenen Maßnahmen</strong>, passend zu den tatsächlichen Abläufen in deinem Betrieb, jeweils mit optionaler lokaler Erinnerung.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">🗓️</div>
+            <h3>Kalenderansicht</h3>
+            <p>Alle Geburtstermine und Maßnahmen im Monatskalender, damit dich mitten in der Saison nichts überrascht.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">📲</div>
+            <h3>Widget für den Startbildschirm</h3>
+            <p>Ein Countdown direkt auf deinem Startbildschirm – „Berta · 14&nbsp;T.“ – und die nächsten drei Termine. Kurz draufschauen statt suchen.</p>
+          </article>
+
+          <article class="feature">
+            <div class="badge">⚡</div>
+            <h3>Schnellrechner</h3>
+            <p>Brauchst du am Behandlungsstand schnell eine Antwort? Wähle eine Tierart und ein Datum – der Geburtstermin steht sofort da, nichts muss gespeichert werden.</p>
+          </article>
+
+          <article class="feature wide">
+            <div class="badge">🔒</div>
+            <h3>Datenschutz von Grund auf – und es funktioniert im Stall</h3>
+            <p>100&nbsp;% offline: kein Empfang, kein Problem – und kein Konto, das du anlegen musst. Keine Werbung, keine Nutzungsanalyse, kein Tracking – die Daten deiner Herde verlassen nie dein Handy (die Datenschutzangaben im App Store und bei Google Play lauten <em>Keine Daten erfasst / Keine Daten geteilt</em>). Exportiere die ganze Herde jederzeit als CSV, wenn die Daten woandershin sollen.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRÄCHTIGKEIT AUF EINEN BLICK -->
+    <section class="blk almanac">
+      <div class="wrap">
+        <span class="eyebrow">Trächtigkeit auf einen Blick</span>
+        <h2 class="sec-title">Acht Tierarten, fest hinterlegt und offline</h2>
+        <div class="species">
+          <div class="beast"><span class="em">🐄</span><div class="nm">Rinder</div><div class="dy">283</div><div class="un">Tage</div></div>
+          <div class="beast"><span class="em">🐴</span><div class="nm">Pferde</div><div class="dy">340</div><div class="un">Tage</div></div>
+          <div class="beast"><span class="em">🐐</span><div class="nm">Ziegen</div><div class="dy">150</div><div class="un">Tage</div></div>
+          <div class="beast"><span class="em">🐑</span><div class="nm">Schafe</div><div class="dy">147</div><div class="un">Tage</div></div>
+          <div class="beast"><span class="em">🐷</span><div class="nm">Schweine</div><div class="dy">114</div><div class="un">Tage</div></div>
+          <div class="beast"><span class="em">🐰</span><div class="nm">Kaninchen</div><div class="dy">31</div><div class="un">Tage</div></div>
+          <div class="beast"><span class="em">🦙</span><div class="nm">Alpakas</div><div class="dy">345</div><div class="un">Tage</div></div>
+          <div class="beast"><span class="em">🦙</span><div class="nm">Lamas</div><div class="dy">350</div><div class="un">Tage</div></div>
+        </div>
+        <p class="note">Durchschnittswerte aus veröffentlichten Trächtigkeitstabellen universitärer Agrarberatungsdienste, mit eingebauten Rasseanpassungen. Jede Herde ist anders – du kannst die Dauer für jedes Tier einzeln anpassen. Die Maßnahmen-Vorlagen beschreiben gängige Praxis und sind keine tierärztliche Beratung; kläre den Zeitpunkt mit deiner Tierarztpraxis ab.</p>
+      </div>
+    </section>
+
+    <!-- IDENTITÄTSBAND -->
+    <section class="blk band">
+      <div class="wrap">
+        <p class="q">Keine Werbung. Kein Konto. <em>Funktioniert ohne Empfang im Stall.</em></p>
+        <small>Das ist unser ganzes Versprechen.</small>
+      </div>
+    </section>
+
+    <!-- SUPPORT -->
+    <section class="blk support">
+      <div class="wrap">
+        <span class="eyebrow" style="justify-content:center">Brauchst du Hilfe?</span>
+        <h2 class="sec-title">Wir helfen dir gern</h2>
+        <p class="sec-intro">Fragen, Feedback, eine Tierart oder Rasse, die du dir wünschst, oder ein Fehler, den du melden möchtest – schreib uns, und ein echter Mensch liest deine Nachricht.</p>
+        <a class="cta" href="mailto:braniapps@gmail.com">✉️ E-Mail an den Support</a>
+        <p class="respond">braniapps@gmail.com · wir versuchen, innerhalb weniger Tage zu antworten</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot-top">
+          <div class="foot-brand">
+            <img src="app-icon.png" alt="BredDay-Symbol">
+            <div>
+              <b>BredDay</b>
+              <span>Trächtigkeits- und Belegungsrechner für Nutztiere</span>
+            </div>
+          </div>
+          <nav class="foot-links">
+            <a href="index.html">Support</a>
+            <a href="privacy.html">Datenschutzerklärung</a>
+            <a href="terms.html">Nutzungsbedingungen</a>
+            <a href="mailto:braniapps@gmail.com">Kontakt</a>
+          </nav>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 BredDay. Gemacht für Viehhalter und Kleinbauern.</span>
+          <span class="privacy-badge">🔒 Keine Daten erfasst</span>
         </div>
       </div>
     </footer>

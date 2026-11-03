@@ -1,7 +1,7 @@
 (function () {
   // Set first: the page styles only hide languages once this is present, so a
   // script error before this line (e.g. a parse failure) degrades to all
-  // five languages shown stacked, never to none. Everything AFTER it runs
+  // six languages shown stacked, never to none. Everything AFTER it runs
   // inside the try/catch below, whose catch removes this very attribute:
   // it is what authorises the stylesheet to hide any [data-lang] section,
   // so any failure to complete setup must withdraw that authorisation
@@ -11,11 +11,11 @@
   document.documentElement.dataset.js = "on";
 
   try {
-    var HASH = { portugues: "pt", espanol: "es", francais: "fr", italiano: "it", top: "en" };
-    // BredDay ships plain "es" (pan-Latin-American Spanish), "fr" and "it" —
+    var HASH = { portugues: "pt", espanol: "es", francais: "fr", italiano: "it", deutsch: "de", top: "en" };
+    // BredDay ships plain "es" (pan-Latin-American Spanish), "fr", "it" and "de" —
     // this mirrors the app's own String Catalog languages.
-    var LANG_ATTR = { en: "en", pt: "pt-BR", es: "es", fr: "fr", it: "it" };
-    var FRAGMENT = { pt: "#portugues", es: "#espanol", fr: "#francais", it: "#italiano", en: "" };
+    var LANG_ATTR = { en: "en", pt: "pt-BR", es: "es", fr: "fr", it: "it", de: "de" };
+    var FRAGMENT = { pt: "#portugues", es: "#espanol", fr: "#francais", it: "#italiano", de: "#deutsch", en: "" };
     var STORE_KEY = "bredday.lang";
     // The three real pages of this site, keyed by filename. Everything else an
     // <a> can point at — mailto:, the App Store listing, apple.com/legal — is
@@ -26,7 +26,7 @@
     // Written as a function rather than a map lookup so that no inherited
     // Object property ("constructor", "toString", ...) can masquerade as a
     // valid stored language.
-    function isLang(v) { return v === "en" || v === "pt" || v === "es" || v === "fr" || v === "it"; }
+    function isLang(v) { return v === "en" || v === "pt" || v === "es" || v === "fr" || v === "it" || v === "de"; }
 
     var sections = Array.prototype.slice.call(document.querySelectorAll("[data-lang]"));
     var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
@@ -110,7 +110,7 @@
       if (!store) return null;
       try {
         var v = store.getItem(STORE_KEY);
-        // Anything that is not one of the five languages — hand-edited, left
+        // Anything that is not one of the six languages — hand-edited, left
         // by an older build, corrupted — is ignored rather than trusted.
         return isLang(v) ? v : null;
       } catch (e) {
@@ -127,7 +127,7 @@
       // Order matters, and the first two are the non-obvious part.
       //
       // A language named in the URL outranks the stored preference on purpose:
-      // #portugues / #espanol / #francais / #italiano / #top is an explicit, per-visit request — the
+      // #portugues / #espanol / #francais / #italiano / #deutsch / #top is an explicit, per-visit request — the
       // BredDay app links here with exactly these fragments so the page opens
       // in the language the app is showing — while the stored value only
       // records what this browser chose last time. If memory won, a Portuguese
@@ -142,6 +142,7 @@
       if (n.indexOf("es") === 0) return "es";
       if (n.indexOf("fr") === 0) return "fr";
       if (n.indexOf("it") === 0) return "it";
+      if (n.indexOf("de") === 0) return "de";
       return "en";
     }
 
@@ -241,7 +242,7 @@
     // sticky wrong answer this feature exists to avoid.
     if (HASH[initialHash]) remember(initialLang);
     // Only re-derive the language when the new hash actually names one of the
-    // five language anchors (#top / #portugues / #espanol / #francais / #italiano). Any other
+    // six language anchors (#top / #portugues / #espanol / #francais / #italiano / #deutsch). Any other
     // in-page anchor must leave the reader's current language alone: falling
     // through to pick()'s navigator.language branch on every hashchange would
     // silently switch a PT/ES reader who clicks an ordinary anchor to
@@ -256,7 +257,7 @@
   } catch (err) {
     // Setup did not complete, so withdraw the authorisation data-js grants
     // the stylesheet to hide content: without it, the no-JS branch takes
-    // over and all five languages render stacked. Never rethrow past here.
+    // over and all six languages render stacked. Never rethrow past here.
     document.documentElement.removeAttribute("data-js");
     console.error("site.js: language-tab setup failed, falling back to no-JS presentation", err);
   }

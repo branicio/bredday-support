@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — BredDay</title>
-<meta name="description" content="BredDay's privacy policy. We collect nothing — the app works fully offline and your herd data never leaves your device. In English, Portuguese, Spanish, French and Italian.">
+<meta name="description" content="BredDay's privacy policy. We collect nothing — the app works fully offline and your herd data never leaves your device. In English, Portuguese, Spanish, French, Italian and German.">
 <link rel="icon" href="app-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,7 +42,7 @@
 
   /* ---------- Language switch ----------
      .langtabs is the role="tablist"; site.js maintains aria-selected,
-     aria-controls and tabindex on the buttons. Hidden without JS: all five
+     aria-controls and tabindex on the buttons. Hidden without JS: all six
      languages already render stacked then, so a switch that cannot switch
      anything would only be a trap. */
   .langtabs{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(--paper-2);border:1px solid var(--hair);flex:none}
@@ -54,7 +54,7 @@
 
   /* Languages are hidden ONLY when site.js has announced itself by setting
      data-js on <html>. If the script never runs or throws, this selector
-     stops matching and all five languages render stacked — readable,
+     stops matching and all six languages render stacked — readable,
      anchor-navigable, and complete. Showing the wrong language is cosmetic;
      showing none would be a legal-content outage. Never hide [data-lang]
      outside an html[data-js="on"] scope. */
@@ -107,22 +107,23 @@
 
 <!-- Chrome: lives outside every [data-lang] section, so its text is swapped by
      site.js from the data-i18n-* attributes rather than by duplication. The
-     five tab labels stay untranslated: a language's own endonym initials are
+     six tab labels stay untranslated: a language's own endonym initials are
      correct in every locale. -->
 <header class="site">
   <div class="nav">
     <a class="brand" href="index.html"><img src="app-icon.png" alt="BredDay icon"><b>BredDay</b></a>
-    <nav class="nav-links" aria-label="Main" data-i18n-aria-en="Main" data-i18n-aria-pt="Principal" data-i18n-aria-es="Principal" data-i18n-aria-fr="Principale" data-i18n-aria-it="Principale">
-      <a href="index.html" data-i18n-en="Home" data-i18n-pt="Início" data-i18n-es="Inicio" data-i18n-fr="Accueil" data-i18n-it="Home">Home</a>
-      <a href="privacy.html" class="active" aria-current="page" data-i18n-en="Privacy" data-i18n-pt="Privacidade" data-i18n-es="Privacidad" data-i18n-fr="Confidentialité" data-i18n-it="Privacy">Privacy</a>
-      <a href="terms.html" data-i18n-en="Terms" data-i18n-pt="Termos" data-i18n-es="Términos" data-i18n-fr="Conditions" data-i18n-it="Termini">Terms</a>
+    <nav class="nav-links" aria-label="Main" data-i18n-aria-en="Main" data-i18n-aria-pt="Principal" data-i18n-aria-es="Principal" data-i18n-aria-fr="Principale" data-i18n-aria-it="Principale" data-i18n-aria-de="Hauptnavigation">
+      <a href="index.html" data-i18n-en="Home" data-i18n-pt="Início" data-i18n-es="Inicio" data-i18n-fr="Accueil" data-i18n-it="Home" data-i18n-de="Start">Home</a>
+      <a href="privacy.html" class="active" aria-current="page" data-i18n-en="Privacy" data-i18n-pt="Privacidade" data-i18n-es="Privacidad" data-i18n-fr="Confidentialité" data-i18n-it="Privacy" data-i18n-de="Datenschutz">Privacy</a>
+      <a href="terms.html" data-i18n-en="Terms" data-i18n-pt="Termos" data-i18n-es="Términos" data-i18n-fr="Conditions" data-i18n-it="Termini" data-i18n-de="Nutzungsbedingungen">Terms</a>
     </nav>
-    <div class="langtabs" role="tablist" aria-label="Language" data-i18n-aria-en="Language" data-i18n-aria-pt="Idioma" data-i18n-aria-es="Idioma" data-i18n-aria-fr="Langue" data-i18n-aria-it="Lingua">
+    <div class="langtabs" role="tablist" aria-label="Language" data-i18n-aria-en="Language" data-i18n-aria-pt="Idioma" data-i18n-aria-es="Idioma" data-i18n-aria-fr="Langue" data-i18n-aria-it="Lingua" data-i18n-aria-de="Sprache">
       <button type="button" role="tab" data-lang-target="en" aria-label="English">EN</button>
       <button type="button" role="tab" data-lang-target="pt" aria-label="Português">PT</button>
       <button type="button" role="tab" data-lang-target="es" aria-label="Español">ES</button>
       <button type="button" role="tab" data-lang-target="fr" aria-label="Français">FR</button>
       <button type="button" role="tab" data-lang-target="it" aria-label="Italiano">IT</button>
+      <button type="button" role="tab" data-lang-target="de" aria-label="Deutsch">DE</button>
     </div>
   </div>
 </header>
@@ -131,13 +132,15 @@
 
   <!-- ============================================================ ENGLISH ==
        site.js stamps role="tabpanel", id, and aria-hidden on this element.
-       Never hand-author those. Portuguese and Spanish are exact structural
-       copies of this block with data-lang / lang / aria-label and the copy
-       swapped.
+       Never hand-author those. Portuguese, Spanish, French, Italian and German
+       are exact structural copies of this block with data-lang / id / lang /
+       aria-label and the copy swapped.
 
-       id="portugues" and id="espanol" on the sections below are the only
-       hand-authored ids besides id="top": they are the deep-link anchors the
-       BredDay app links to (privacy.html#portugues / #espanol / #top) and
+       id="portugues", id="espanol", id="francais", id="italiano" and
+       id="deutsch" on the sections below are the only hand-authored ids
+       besides id="top": they are the deep-link anchors the BredDay app links
+       to (privacy.html#portugues / #espanol / #francais / #italiano /
+       #deutsch / #top) and
        site.js maps them to a language. id="top" stays on the English <h1>
        alone — ids must be unique. -->
   <section data-lang="en" lang="en" aria-label="English">
@@ -681,6 +684,116 @@
         <div class="foot-bottom">
           <span>© 2026 BredDay. Tutti i diritti riservati.</span>
           <span class="privacy-badge">🔒 Dati non raccolti</span>
+        </div>
+      </div>
+    </footer>
+
+  </section>
+
+  <!-- ========================================================== DEUTSCH ==
+       Strukturklon des englischen Blocks: gleiche Elemente, gleiche Klassen,
+       gleiche Reihenfolge – nur der Text und data-lang / id / lang / aria-label ändern sich. -->
+  <section data-lang="de" id="deutsch" lang="de" aria-label="Deutsch">
+
+    <div class="wrap">
+      <div class="doc-hero">
+        <span class="eyebrow">Rechtliches</span>
+        <h1>Datenschutzerklärung</h1>
+        <p class="app">BredDay – Trächtigkeits- und Belegungsrechner für Nutztiere (iOS und Android)</p>
+        <span class="date">Gültig ab: 30. Oktober 2026</span>
+      </div>
+
+      <article class="doc">
+        <div class="callout">
+          <strong>Unser Versprechen:</strong> Bei der Entwicklung von BredDay hat der Schutz deiner Privatsphäre Vorrang. Wir erheben, speichern und teilen keinerlei personenbezogene Daten. Die App funktioniert vollständig offline – die Daten deiner Herde verlassen nie dein Gerät.
+        </div>
+
+        <h2>Welche Daten wir erheben</h2>
+        <p>BredDay erhebt keinerlei personenbezogene Daten. Alle Daten werden lokal auf deinem Gerät erstellt und im geräteinternen Speicher des Betriebssystems gespeichert:</p>
+        <ul>
+          <li><strong>Herdendaten:</strong> Deine Tiere, Belegungen, Geburtstermine, Maßnahmen, Geburten, Angaben zum Vatertier und Notizen werden ausschließlich lokal auf deinem Gerät gespeichert.</li>
+          <li><strong>Benutzereinstellungen:</strong> Deine Einstellungen (z.&nbsp;B. Voreinstellungen für Erinnerungen, pro Tier angepasste Trächtigkeitsdauern und deine Bestätigung des Hinweises in der App) werden lokal auf deinem Gerät gespeichert.</li>
+          <li><strong>Widget-Daten:</strong> Das Widget auf dem Startbildschirm liest eine kleine Momentaufnahme deiner anstehenden Geburtstermine aus einem gemeinsam genutzten Speicherbereich auf deinem Gerät. Diese Daten werden nie irgendwohin übertragen.</li>
+        </ul>
+
+        <h2>Welche Daten wir NICHT erheben</h2>
+        <p>Folgende Daten werden von BredDay <strong>nicht</strong> erhoben, gespeichert oder übertragen:</p>
+        <ul>
+          <li>Personenbezogene Identifikationsdaten (Name, E-Mail-Adresse, Telefonnummer)</li>
+          <li>Standortdaten</li>
+          <li>Nutzungsanalysen oder Tracking-Daten</li>
+          <li>Gerätekennungen</li>
+          <li>Jegliche Daten aus anderen Apps auf deinem Gerät</li>
+        </ul>
+
+        <h2>Benachrichtigungen</h2>
+        <p>BredDay kann dich an Maßnahmen zu deinen Belegungen und an Geburtstermine erinnern. Für diese Benachrichtigungen gilt:</p>
+        <ul>
+          <li>Sie werden vollständig auf deinem Gerät geplant und zugestellt</li>
+          <li>Es sind keine Push-Benachrichtigungen – kein externer Server ist beteiligt</li>
+          <li>Sie lassen sich vollständig über die Benachrichtigungseinstellungen deines Geräts steuern</li>
+        </ul>
+
+        <h2>CSV-Export</h2>
+        <p>BredDay Pro kann deine Herdendaten als CSV-Datei exportieren. Der Export erfolgt nur, wenn du ihn selbst startest, und die Datei wird an das Teilen-Menü deines Geräts übergeben – so bestimmst du genau, wohin sie geht (E-Mail, Cloud-Speicher, Messenger usw.). Wir sehen oder erhalten deine exportierten Daten nie.</p>
+
+        <h2>Dienste von Drittanbietern</h2>
+        <p>BredDay nutzt keine Dienste von Drittanbietern, keine externen APIs, keine Analysetools, keine Werbe-SDKs und keine Tracking-Technologien. Wir erheben keine Nutzungsstatistiken, Absturzberichte oder Verhaltensdaten. Die App benötigt keine Internetverbindung, um zu funktionieren.</p>
+
+        <h2>Datenspeicherung und Datensicherheit</h2>
+        <p>Alle Daten werden lokal auf deinem Gerät gespeichert:</p>
+        <ul>
+          <li>Tier- und Belegungsdaten, Maßnahmen und Geburten</li>
+          <li>Benutzerpräferenzen und Einstellungen</li>
+          <li>Abonnementstatus (über den jeweiligen App-Store bestätigt)</li>
+        </ul>
+        <p>Wir betreiben keine Server, auf denen deine personenbezogenen Daten gespeichert werden. Es gibt keine Benutzerkonten und keine Cloud-Synchronisierung. Deine Daten sind durch die integrierten Sicherheitsfunktionen deines Geräts geschützt, darunter Gerätecode, biometrischer Schutz (Face ID / Touch ID / Fingerabdruck) und die integrierte Verschlüsselung des Betriebssystems unter iOS und Android. Du kannst alle gespeicherten Daten jederzeit entfernen, indem du die App löschst.</p>
+
+        <h2>Deine Datenschutzrechte</h2>
+        <p>Datenschutzvorschriften wie die DSGVO und der California Consumer Privacy Act (CCPA/CPRA) räumen dir Rechte in Bezug auf personenbezogene Daten ein, die Unternehmen über dich gespeichert haben. Da BredDay keine personenbezogenen Daten erhebt, speichern wir auch keine – es gibt nichts, was wir in deinem Namen einsehen, berichtigen, exportieren oder löschen könnten. Deine Herdendaten existieren nur auf deinem Gerät und unterliegen vollständig deiner Kontrolle; wenn du die App löschst, werden sie gelöscht.</p>
+
+        <h2>Abonnements und Zahlungen</h2>
+        <p>BredDay ist kostenlos nutzbar; ein optionales BredDay-Pro-Abonnement schaltet weitere Funktionen frei. Die gesamte Abonnementverwaltung und Zahlungsabwicklung erfolgt ausschließlich über den App-Store, aus dem du BredDay heruntergeladen hast – Apple (App Store) oder Google (Google Play). Wir haben keinen Zugriff auf deine Zahlungsinformationen, deine Kreditkartendaten oder deine Apple-ID bzw. dein Google-Konto.</p>
+        <p>Abonnements kannst du jederzeit in den Kontoeinstellungen deines App-Stores verwalten oder kündigen:</p>
+        <ul>
+          <li><strong>iOS:</strong> Einstellungen &gt; [Dein Name] &gt; Abonnements (oder besuche die <a href="https://support.apple.com/de-de/HT202039" target="_blank" rel="noopener noreferrer">Support-Seite von Apple zu Abonnements</a>)</li>
+          <li><strong>Android:</strong> Google Play Store &gt; Profilsymbol &gt; Zahlungen und Abos &gt; Abos (oder besuche die <a href="https://support.google.com/googleplay/answer/7018481?hl=de" target="_blank" rel="noopener noreferrer">Support-Seite von Google Play zu Abos</a>)</li>
+        </ul>
+        <p>Diese Datenschutzerklärung gilt nur für die App BredDay – wie dein App-Store mit deinen Kaufinformationen umgeht, ist in dessen eigener Datenschutzerklärung beschrieben (<a href="https://www.apple.com/de/legal/privacy/" target="_blank" rel="noopener noreferrer">Datenschutzrichtlinie von Apple</a> und <a href="https://policies.google.com/privacy?hl=de" target="_blank" rel="noopener noreferrer">Datenschutzerklärung von Google</a>).</p>
+
+        <h2>Datenschutz bei Kindern</h2>
+        <p>BredDay erhebt wissentlich keine personenbezogenen Daten von Kindern. Die App ist für alle Altersgruppen freigegeben und enthält keine anstößigen Inhalte.</p>
+
+        <h2>Änderungen dieser Datenschutzerklärung</h2>
+        <p>Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren. Änderungen werden auf dieser Seite mit einem aktualisierten Gültigkeitsdatum veröffentlicht.</p>
+
+        <div class="contact">
+          <h2>Kontakt</h2>
+          <p>Wenn du Fragen zu dieser Datenschutzerklärung hast, schreib uns an:</p>
+          <a class="mail" href="mailto:braniapps@gmail.com">braniapps@gmail.com</a>
+        </div>
+
+        <a class="doc-back" href="index.html">← Zurück zum Support</a>
+      </article>
+    </div>
+
+    <footer>
+      <div class="wrap" style="max-width:1060px">
+        <div class="foot-top">
+          <div class="foot-brand">
+            <img src="app-icon.png" alt="BredDay-Symbol">
+            <div><b>BredDay</b><span>Trächtigkeits- und Belegungsrechner für Nutztiere</span></div>
+          </div>
+          <nav class="foot-links">
+            <a href="index.html">Support</a>
+            <a href="privacy.html">Datenschutzerklärung</a>
+            <a href="terms.html">Nutzungsbedingungen</a>
+            <a href="mailto:braniapps@gmail.com">Kontakt</a>
+          </nav>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 BredDay. Alle Rechte vorbehalten.</span>
+          <span class="privacy-badge">🔒 Keine Daten erfasst</span>
         </div>
       </div>
     </footer>
