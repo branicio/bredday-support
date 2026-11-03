@@ -43,3 +43,9 @@ braniapps@gmail.com
 Official store badges per language live in `badges/` (App Store SVG, Google Play PNG);
 the fr/it files were copied from the Pew Pal support site; the de files (2026-11-03)
 are Apple's and Google's official German badges.
+
+## EU legal pages (2026-11-03)
+
+- `impressum.html` — Impressum / legal notice (§ 5 DDG; English and French mentions légales; one line per other language). Static: no `[data-lang]` sections, so it can never render blank. Linked from every footer.
+- Privacy policy: a "Controller and your rights (GDPR)" section in every language; terms: a section for EU/EEA/UK/Swiss consumers. Text comes from one canonical source shared by all of Paulo's support sites — change it there, not here.
+- `fonts/` — Fraunces + Archivo self-hosted (OFL, `fonts/LICENSES.txt`); no request goes to Google Fonts.
