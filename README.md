@@ -9,6 +9,7 @@ Hosted via GitHub Pages at: https://branicio.github.io/bredday-support/
 - [Support](https://branicio.github.io/bredday-support/) — landing page (contact + links) (`index.html`)
 - [Privacy Policy](https://branicio.github.io/bredday-support/privacy.html) (`privacy.html`)
 - [Terms of Use](https://branicio.github.io/bredday-support/terms.html) (`terms.html`)
+- [Impressum](https://branicio.github.io/bredday-support/impressum.html) (`impressum.html`) — the § 5 DDG legal notice (provider, contact, hosting), added 2026-11-03, with one `[data-lang]` section per site language
 
 ## Languages
 
